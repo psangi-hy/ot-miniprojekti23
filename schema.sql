@@ -8,4 +8,3 @@ CREATE TABLE articles (
     volume VARCHAR (100),
     pages VARCHAR (50)
 );
-
