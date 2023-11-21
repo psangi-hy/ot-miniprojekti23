@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Uusi artikkeli</title>
+<style>
+form {
+	display: table;
+}
+form div {
+	display: table-row;
+}
+label, input {
+	display: table-cell;
+}
+</style>
+</head>
+<body>
+	<h1>Uusi artikkeli</h1>
+	<form method="post">
+	<div>
+		<label for="key">Tunnus</label>
+		<input type="text" name="key" id="key" />
+	</div><div>
+		<label for="author">Tekijä(t)</label>
+		<input type="text" name="author" id="author" />
+	</div><div>
+		<label for="title">Otsikko</label>
+		<input type="text" name="title" id="title" />
+	</div><div>
+		<label for="journal">Julkaisu</label>
+		<input type="text" name="journal" id="journal" />
+	</div><div>
+		<label for="year">Vuosi</label>
+		<input type="text" name="year" id="year" />
+	</div><div>
+		<label for="volume">Volyymi</label>
+		<input type="text" name="volume" id="volume" />
+	</div><div>
+		<label for="pages">Sivut</label>
+		<input type="text" name="pages" id="pages" />
+	</div>
+	<div>
+		<input type="submit" value="Lähetä" />
+	</div>
+	</form>
+</body>
+</html>
