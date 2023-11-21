@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Artikkelit</title>
+</head>
+<body>
+	<h1>Artikkelit</h1>
+	<ol>
+		{% for item in items %}
+		<li><table>
+		{% if item.author %}
+		<tr>
+			<td>Tekijä(t)</td>
+			<td>{{ item.author }}</td>
+		</tr>
+		{% endif %}
+		{% if item.title %}
+		<tr>
+			<td>Otsikko</td>
+			<td>{{ item.title }}</td>
+		</tr>
+		{% endif %}
+		{% if item.journal %}
+		<tr>
+			<td>Julkaisu</td>
+			<td>{{ item.journal }}</td>
+		</tr>
+		{% endif %}
+		{% if item.year %}
+		<tr>
+			<td>Vuosi</td>
+			<td>{{ item.year }}</td>
+		</tr>
+		{% endif %}
+		{% if item.volume %}
+		<tr>
+			<td>Volyymi</td>
+			<td>{{ item.volume }}</td>
+		</tr>
+		{% endif %}
+		{% if item.pages %}
+		<tr>
+			<td>Sivut</td>
+			<td>{{ item.pages }}</td>
+		</tr>
+		{% endif %}
+		</table></li>
+		{% endfor %}
+	</ol>
+
+	<pre>
+	{% for item in items %}
+	{{ '@article{' }}{{item.key}},
+		{% if item.author %} {{ 'author = {' }}{{ item.author }}{{ '}' }},
+		{% endif %}{% if item.title %} {{ 'title = {' }}{{ item.title }}{{ '}' }},
+		{% endif %}{% if item.journal %} {{ 'journal = {' }}{{ item.journal }}{{ '}' }},
+		{% endif %}{% if item.year %} {{ 'year = {' }}{{ item.year }}{{ '}' }},
+		{% endif %}{% if item.volume %} {{ 'volume = {' }}{{ item.volume }}{{ '}' }},
+		{% endif %}{% if item.pages %} {{ 'pages = {' }}{{ item.pages }}{{ '}' }},
+		{% endif %}
+	{{ '}' }}
+	{% endfor %}
+	</pre>
+</body>
+</html>
