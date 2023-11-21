@@ -1,4 +1,4 @@
-CREATE TABLE articles (
+CREATE TABLE articles(
     id INTEGER PRIMARY KEY,
     key VARCHAR (40) UNIQUE,
     author VARCHAR (100),
