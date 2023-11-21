@@ -1,6 +1,5 @@
 <<<<<<< HEAD
 testi
-testi2 t. samu
 =======
 # Elastinen
 
