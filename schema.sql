@@ -4,6 +4,8 @@ CREATE TABLE articles (
     author VARCHAR (100),
     title VARCHAR (200),
     journal VARCHAR (200),
-    year INTEGER    
+    year INTEGER,
+    volume VARCHAR (100),
+    pages VARCHAR (50)
 );
 
