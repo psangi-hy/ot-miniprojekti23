@@ -13,4 +13,5 @@ https://docs.google.com/spreadsheets/d/17COsn4LBcv9tK5OwG2H8qlhSb43Yw5VLccIJSeli
     * selkeä arkkitehtuuri, koodin eri toiminnallisuudet ovat omissa tiedostoissaan
     * järkevä nimeäminen
     * yhtenäinen koodityyli (noudattaa pylintin avulla määriteltyjä sääntöjä)
+    
 
