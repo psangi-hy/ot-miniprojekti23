@@ -4,7 +4,7 @@ from flask import render_template, redirect, request
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    items = list(db_handling.database_test())
+    items = list(db_handling.select_all_articles())
     return render_template("index.html", items=items)
 
 
