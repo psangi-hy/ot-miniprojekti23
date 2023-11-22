@@ -6,6 +6,7 @@
 </head>
 <body>
 	<h1>Artikkelit</h1>
+	<a href="/new">Uusi artikkeli</a>
 	<ol>
 		{% for item in items %}
 		<li><table>
@@ -51,14 +52,13 @@
 
 	<pre>
 	{% for item in items %}
-	{{ '@article{' }}{{item.key}},
-		{% if item.author %} {{ 'author = {' }}{{ item.author }}{{ '}' }},
-		{% endif %}{% if item.title %} {{ 'title = {' }}{{ item.title }}{{ '}' }},
-		{% endif %}{% if item.journal %} {{ 'journal = {' }}{{ item.journal }}{{ '}' }},
-		{% endif %}{% if item.year %} {{ 'year = {' }}{{ item.year }}{{ '}' }},
-		{% endif %}{% if item.volume %} {{ 'volume = {' }}{{ item.volume }}{{ '}' }},
-		{% endif %}{% if item.pages %} {{ 'pages = {' }}{{ item.pages }}{{ '}' }},
-		{% endif %}
+	{{ '@article{' }}{{item.key}},{% if item.author %}
+		{{ 'author = {' }}{{ item.author }}{{ '}' }},{% endif %}{% if item.title %}
+		{{ 'title = {' }}{{ item.title }}{{ '}' }},{% endif %}{% if item.journal %}
+		{{ 'journal = {' }}{{ item.journal }}{{ '}' }},{% endif %}{% if item.year %}
+		{{ 'year = {' }}{{ item.year }}{{ '}' }},{% endif %}{% if item.volume %}
+		{{ 'volume = {' }}{{ item.volume }}{{ '}' }},{% endif %}{% if item.pages %}
+		{{ 'pages = {' }}{{ item.pages }}{{ '}' }},{% endif %}
 	{{ '}' }}
 	{% endfor %}
 	</pre>
