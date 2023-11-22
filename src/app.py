@@ -22,6 +22,10 @@ def run_sql_schema():
 with app.app_context():
     os.makedirs(os.path.join(basedir, 'data'), exist_ok=True)
     db.create_all() # Create database
-    #run_sql_schema() # Run SQL Schema, does not work properly - error when opening application after table already exists
+    # Create a better solution for this later
+    try:
+        run_sql_schema()
+    except:
+        pass
 
 import routes
