@@ -5,44 +5,44 @@
 	<title>Artikkelit</title>
 </head>
 <body>
-	<h1>Artikkelit</h1>
-	<a href="/new">Uusi artikkeli</a>
+	<h1>Articles</h1>
+	<a href="/new">New article</a>
 	<ol>
 		{% for item in items %}
 		<li><table>
 		{% if item.author %}
 		<tr>
-			<td>Tekijä(t)</td>
+			<td>Author: </td>
 			<td>{{ item.author }}</td>
 		</tr>
 		{% endif %}
 		{% if item.title %}
 		<tr>
-			<td>Otsikko</td>
+			<td>Title: </td>
 			<td>{{ item.title }}</td>
 		</tr>
 		{% endif %}
 		{% if item.journal %}
 		<tr>
-			<td>Julkaisu</td>
+			<td>Journal: </td>
 			<td>{{ item.journal }}</td>
 		</tr>
 		{% endif %}
 		{% if item.year %}
 		<tr>
-			<td>Vuosi</td>
+			<td>Year: </td>
 			<td>{{ item.year }}</td>
 		</tr>
 		{% endif %}
 		{% if item.volume %}
 		<tr>
-			<td>Volyymi</td>
+			<td>Volume: </td>
 			<td>{{ item.volume }}</td>
 		</tr>
 		{% endif %}
 		{% if item.pages %}
 		<tr>
-			<td>Sivut</td>
+			<td>Pages: </td>
 			<td>{{ item.pages }}</td>
 		</tr>
 		{% endif %}
