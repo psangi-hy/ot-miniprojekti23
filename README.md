@@ -16,7 +16,7 @@
 
 ## Sovelluksen asennus- ja käyttöohje
 **Huom:**
-Asentamisen ohjeet ovat hieman erilaisia riippuen käyttöjärjestelmästä (Linux/Windows/Mac). Seuraavat esimerkkiohjeet ovat Linuxille. Oletus on että käytössäsi on Python3  ja [SQLite](https://www.sqlite.org/download.html).
+Asentamisen ohjeet ovat hieman erilaisia riippuen käyttöjärjestelmästä (Linux/Windows/Mac). Seuraavat esimerkkiohjeet ovat Linuxille. Oletus on että käytössäsi on Python3, poetry  ja [SQLite](https://www.sqlite.org/download.html).
 
 1. Lataa sovelluksen GitHub-repository yhteen kansioon
 
