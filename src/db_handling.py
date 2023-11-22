@@ -8,7 +8,7 @@ def select_all_articles():
     return result
 
 def new_article(key, author, title, journal, year, volume, pages):
-    if len(key)== 0 or len(author) == 0 or len(year) == 0 or len(journal) == 0:
+    if len(key)== 0 or len(author) == 0 or len(year) == 0 or len(journal) == 0 or len(title) == 0:
         return False
     sql = text(
             "INSERT INTO articles (key, author, title, journal, year, volume, pages)"
