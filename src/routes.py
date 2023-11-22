@@ -22,3 +22,8 @@ def new():
         pages = request.form["pages"]
         db_handling.new_article(key, author, title, journal, year, volume, pages)
         return redirect("/")
+
+@app.route("/tests/reset", methods=["GET", "POST"])
+def reset_tests():
+    db_handling.reset_tests()
+    return redirect("/")
