@@ -22,7 +22,7 @@ Asentamisen ohjeet ovat hieman erilaisia riippuen käyttöjärjestelmästä (Lin
 
 2. Riippuvuuksien injektointi terminaalissa
 ```bash
-python3 -m venv venv
+poetry install
 ```
 
 3. Käynnistä virtuaaliympäristö terminaalissa
