@@ -4,7 +4,6 @@ Library  ./AppLibrary.py
 
 *** Variables ***
 ${SERVER}  localhost:5000
-${BROWSER}  headlesschrome
 ${DELAY}  0.0 seconds
 ${HOME URL}  http://${SERVER}
 ${NEW URL}  http://${SERVER}/new
@@ -12,7 +11,13 @@ ${NEW URL}  http://${SERVER}/new
 
 *** Keywords ***
 Open And Configure Browser
-    Open Browser  browser=${BROWSER}
+    # jos käytät Firefoxia ja Geckodriveriä käytä seuraavaa riviä sitä alemman sijaan
+    #${options}  Evaluate  sys.modules['selenium.webdriver'].FirefoxOptions()  sys
+    ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
+    Call Method    ${options}    add_argument    --no-sandbox
+    # seuraava rivi on kommentoitu pois tässä vaiheessa
+    Call Method  ${options}  add_argument  --headless
+    Open Browser  browser=chrome  options=${options}
     Set Selenium Speed  ${DELAY}
 
 Front Page Should Be Open

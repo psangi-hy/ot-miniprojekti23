@@ -23,3 +23,4 @@ class AppLibrary:
         }
 
         requests.post(f"{self._base_url}/new", json=data)
+        
