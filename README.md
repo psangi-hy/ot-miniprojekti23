@@ -1,9 +1,9 @@
 # Elastinen
 
-## Project backlog
-https://docs.google.com/spreadsheets/d/17COsn4LBcv9tK5OwG2H8qlhSb43Yw5VLccIJSeliQN4/edit#gid=0
-
 ![GHA workflow badge](https://github.com/psangi-hy/ot-miniprojekti23/workflows/CI/badge.svg)
+
+
+ [Backlog (Google Docs)](https://docs.google.com/spreadsheets/d/17COsn4LBcv9tK5OwG2H8qlhSb43Yw5VLccIJSeliQN4/edit#gid=0)
 
 ## Definition of Done
 * Product backlogin jokaisella sprinttiin valitulla user storylla on kirjattu hyväksymiskriteerit
@@ -13,5 +13,5 @@ https://docs.google.com/spreadsheets/d/17COsn4LBcv9tK5OwG2H8qlhSb43Yw5VLccIJSeli
     * selkeä arkkitehtuuri, koodin eri toiminnallisuudet ovat omissa tiedostoissaan
     * järkevä nimeäminen
     * yhtenäinen koodityyli (noudattaa pylintin avulla määriteltyjä sääntöjä)
-    
 
+## Sovelluksen asennus- ja käyttöohje
