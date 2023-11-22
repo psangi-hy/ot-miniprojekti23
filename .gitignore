@@ -1,4 +1,5 @@
 sources.db
+src/data/database.sqlite
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
