@@ -15,3 +15,22 @@
     * yhtenäinen koodityyli (noudattaa pylintin avulla määriteltyjä sääntöjä)
 
 ## Sovelluksen asennus- ja käyttöohje
+**Huom:**
+Asentamisen ohjeet ovat hieman erilaisia riippuen käyttöjärjestelmästä (Linux/Windows/Mac). Seuraavat esimerkkiohjeet ovat Linuxille. Oletus on että käytössäsi on Python3, poetry  ja [SQLite](https://www.sqlite.org/download.html).
+
+1. Lataa sovelluksen GitHub-repository yhteen kansioon
+
+2. Riippuvuuksien injektointi terminaalissa
+```bash
+poetry install
+```
+
+3. Käynnistä virtuaaliympäristö terminaalissa
+```bash
+poetry shell
+```
+
+4. Käynnistä sovellus
+```bash
+flask run
+```

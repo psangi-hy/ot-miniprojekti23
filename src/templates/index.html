@@ -2,11 +2,19 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Artikkelit</title>
+	<title>Articles</title>
+<style>
+pre {
+	background-color: lightgrey;
+	border: solid;
+	border-color: grey;
+}
+</style>
 </head>
 <body>
 	<h1>Articles</h1>
 	<a href="/new">New article</a>
+	{% if items %}
 	<ol>
 		{% for item in items %}
 		<li><table>
@@ -50,6 +58,8 @@
 		{% endfor %}
 	</ol>
 
+	<h2>Bibtex</h2>
+
 	<pre>
 	{% for item in items %}
 	{{ '@article{' }}{{item.key}},{% if item.author %}
@@ -62,5 +72,8 @@
 	{{ '}' }}
 	{% endfor %}
 	</pre>
+	{% else %}
+	<p>There is nothing here yet.</p>
+	{% endif %}
 </body>
 </html>
