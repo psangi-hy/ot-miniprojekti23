@@ -8,6 +8,7 @@ pre {
 	background-color: lightgrey;
 	border: solid;
 	border-color: grey;
+	padding: 30px;
 }
 </style>
 </head>
@@ -60,18 +61,16 @@ pre {
 
 	<h2>Bibtex</h2>
 
-	<pre>
-	{% for item in items %}
-	{{ '@article{' }}{{item.key}},{% if item.author %}
-		{{ 'author = {' }}{{ item.author }}{{ '}' }},{% endif %}{% if item.title %}
-		{{ 'title = {' }}{{ item.title }}{{ '}' }},{% endif %}{% if item.journal %}
-		{{ 'journal = {' }}{{ item.journal }}{{ '}' }},{% endif %}{% if item.year %}
-		{{ 'year = {' }}{{ item.year }}{{ '}' }},{% endif %}{% if item.volume %}
-		{{ 'volume = {' }}{{ item.volume }}{{ '}' }},{% endif %}{% if item.pages %}
-		{{ 'pages = {' }}{{ item.pages }}{{ '}' }},{% endif %}
-	{{ '}' }}
-	{% endfor %}
-	</pre>
+	<pre>{% for item in items %}
+{{ '@article{' }}{{item.key}},{% if item.author %}
+	{{ 'author = {' }}{{ item.author }}{{ '}' }},{% endif %}{% if item.title %}
+	{{ 'title = {' }}{{ item.title }}{{ '}' }},{% endif %}{% if item.journal %}
+	{{ 'journal = {' }}{{ item.journal }}{{ '}' }},{% endif %}{% if item.year %}
+	{{ 'year = {' }}{{ item.year }}{{ '}' }},{% endif %}{% if item.volume %}
+	{{ 'volume = {' }}{{ item.volume }}{{ '}' }},{% endif %}{% if item.pages %}
+	{{ 'pages = {' }}{{ item.pages }}{{ '}' }},{% endif %}
+{{ '}' }}
+{% endfor %}</pre>
 	{% else %}
 	<p>There is nothing here yet.</p>
 	{% endif %}
