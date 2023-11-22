@@ -26,6 +26,6 @@ def new():
 
 
 @app.route("/tests/reset", methods=["GET", "POST"])
-def reset_tests():
+def tests_reset():
     db_handling.reset_tests()
     return redirect("/")
