@@ -1,5 +1,6 @@
-from db import db
 from sqlalchemy.sql import text
+
+from db import db
 
 def select_all_articles():
     sql = text("SELECT * FROM articles")
