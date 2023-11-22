@@ -1,6 +1,7 @@
+from flask import render_template, redirect, request
+
 from app import app
 import db_handling
-from flask import render_template, redirect, request
 
 @app.route("/", methods=["GET", "POST"])
 def index():
