@@ -20,5 +20,5 @@ def new():
         year = request.form("year")
         volume = request.form("volume")
         pages = request.form("pages")
-        db_handing.new_article(key, author, title, journal, year, volume, pages)
+        db_handling.new_article(key, author, title, journal, year, volume, pages)
         return redirect("/")
