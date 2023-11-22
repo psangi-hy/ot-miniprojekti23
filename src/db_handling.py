@@ -24,8 +24,13 @@ def new_article(key, author, title, journal, year, volume, pages):
     db.session.commit()
     return True
 
+def drop_tables():
+    sql = text(
+        "DROP TABLE IF EXISTS articles;"
+    )
+    db.session.execute(sql)
+    db.session.commit()
+
 def reset_tests():
-    os.remove("data/database.sqlite")
-    file = open("data/database.sqlite", "x")
-    file.close()
+    drop_tables()
     run_sql_schema()
