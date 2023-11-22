@@ -1,7 +1,7 @@
+import os
 from sqlalchemy.sql import text
 from app import run_sql_schema
 from db import db
-import os
 
 def select_all_articles():
     sql = text("SELECT * FROM articles")
@@ -26,6 +26,6 @@ def new_article(key, author, title, journal, year, volume, pages):
 
 def reset_tests():
     os.remove("data/database.sqlite")
-    f = open("data/database.sqlite", "x")
-    f.close()
+    file = open("data/database.sqlite", "x")
+    file.close()
     run_sql_schema()
