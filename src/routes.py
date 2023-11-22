@@ -24,7 +24,7 @@ def new():
         if db_handling.new_article(key, author, title, journal, year, volume, pages):
             return redirect("/")
         else:
-            return render_template("error.html", message="Jotain meni pieleen...")
+            return render_template("error.html", message="Something went wrong...")
 
 @app.route("/tests/reset", methods=["GET", "POST"])
 def reset_tests():
