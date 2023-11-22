@@ -6,7 +6,7 @@ Test Setup  Go To New Page
 
 *** Test Cases ***
 Add Article With All Content
-    Set Key  Testi03
+    Set Key  Testi04
     Set Author  Test Author
     Set Title  Great Article
     Set Journal  Testi
@@ -14,7 +14,7 @@ Add Article With All Content
     Set Volume  4
     Set Pages  54-60
     Submit Content
-    Submit Should Succeed  Testi03
+    Submit Should Succeed  Testi04
 
 *** Keywords ***
 Submit Should Succeed
@@ -51,4 +51,4 @@ Set Pages
     Input Text  pages  ${pages}
 
 Submit Content
-    Click Button  Lähetä
+    Click Button  Save
