@@ -30,7 +30,7 @@ poetry install
 poetry shell
 ```
 
-4. Käynnistä sovellus
+4. Käynnistä sovellus terminaalissa (sijaintina src-hakemisto)
 ```bash
 flask run
 ```
