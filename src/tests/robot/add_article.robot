@@ -6,7 +6,7 @@ Test Setup  Go To New Page
 
 *** Test Cases ***
 Add Article With All Content
-    Set Key  Testi04
+    Set Key  Testi00
     Set Author  Test Author
     Set Title  Great Article
     Set Journal  Testi
@@ -14,13 +14,53 @@ Add Article With All Content
     Set Volume  4
     Set Pages  54-60
     Submit Content
-    Submit Should Succeed  Testi04
+    Submit Should Succeed  Testi00
+
+Empty Author Field
+    Set Key  Testi01
+    Set Title  Robot Testing
+    Set Journal  Computers
+    Set Year  2013
+    Submit Content
+    Submit Should Fail  Testi01
+
+Empty Title Field
+    Set Key  Testi02
+    Set Author  Test Author
+    Set Journal  Computers
+    Set Year  2013
+    Submit Content
+    Submit Should Fail  Testi02
+
+Empty Journal Field
+    Set Key  Testi03
+    Set Author  Test Author
+    Set Title  Robot Testing
+    Set Year  2013
+    Submit Content
+    Submit Should Fail  Testi03
+
+Empty Year Field
+    Set Key  Testi04
+    Set Author  Test Author
+    Set Title  Robot Testing
+    Set Journal  Computers
+    Submit Content
+    Submit Should Fail  Testi04
+
 
 *** Keywords ***
 Submit Should Succeed
     [Arguments]  ${key}
     Front Page Should Be Open
     Page Should Contain  ${key}
+
+Submit Should Fail
+    [Arguments]  ${key}
+    Page Should Contain  New Article
+    Go To Front Page
+    Page Should Not Contain  ${key}
+
 
 Set Key
     [Arguments]  ${key}

@@ -25,3 +25,6 @@ Front Page Should Be Open
 
 Go To New Page
     Go To  ${NEW URL}
+
+Go To Front Page
+    Go To  ${HOME URL}
