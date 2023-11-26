@@ -8,6 +8,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 # Check if in testing mode
 is_testing = os.getenv('TESTING') == 'True'
+# If testing, use test-database
 database_name = 'test-database.sqlite' if is_testing else 'database.sqlite'
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///' + os.path.join(basedir, 'data', database_name)
 
@@ -24,11 +25,8 @@ def run_sql_schema():
         connection.execute(sqlalchemy.text(sql_schema))
 
 with app.app_context():
-    data_dir = os.path.join(basedir, 'data')
-    os.makedirs(data_dir, exist_ok=True)
-
     # Check if the database file exists
-    db_file_path = os.path.join(data_dir, database_name)
+    db_file_path = os.path.join('data', database_name)
     if not os.path.exists(db_file_path):
         db.create_all()  # Create database only if it doesn't exist
 
