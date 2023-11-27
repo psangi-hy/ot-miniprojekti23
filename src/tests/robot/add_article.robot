@@ -57,7 +57,7 @@ Submit Should Succeed
 
 Submit Should Fail
     [Arguments]  ${key}
-    Page Should Contain  New Article
+    Page Should Contain  New Reference
     Go To Front Page
     Page Should Not Contain  ${key}
 
