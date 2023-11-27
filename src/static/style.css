@@ -24,3 +24,17 @@ pre {
 	padding: 30px;
 	overflow-x: auto;
 }
+
+.bibtex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.bibtex-entry {
+    flex-basis: calc(25% - 10px);
+    background-color: lightgrey;
+    border: solid 1px grey;
+    padding: 10px;
+    overflow-x: auto;
+}
