@@ -69,13 +69,13 @@ def new_inproceedings(key, author, title, year, booktitle, pages):
     return True
 
 def drop_tables():
-    sql = text(
-        "DROP TABLE IF EXISTS articles;"
-        "DROP TABLE IF EXISTS books;"
-        "DROP TABLE IF EXISTS inproceedings;"
-    )
+    sql_statements = [text("DROP TABLE IF EXISTS articles;"),
+        text("DROP TABLE IF EXISTS books;"),
+        text("DROP TABLE IF EXISTS inproceedings;")]
+    
+    for statement in sql_statements:
+        db.session.execute(statement)
 
-    db.session.execute(sql)
     db.session.commit()
 
 def reset_tests():
