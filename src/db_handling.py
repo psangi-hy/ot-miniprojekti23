@@ -17,7 +17,7 @@ def select_all_inproceedings():
     return result
 
 def new_article(key, author, title, journal, year, volume, pages):
-    if len(key)== 0 or len(author) == 0 or len(year) == 0 or len(journal) == 0 or len(title) == 0:
+    if len(key) == 0 or len(author) == 0 or len(title) == 0  or len(journal) == 0 or len(year) == 0:
         return False
     sql = text(
             "INSERT INTO articles (key, author, title, journal, year, volume, pages)"
@@ -33,6 +33,8 @@ def new_article(key, author, title, journal, year, volume, pages):
     return True
 
 def new_book(key, author, title, year, publisher, volume, pages):
+    if len(key)== 0 or len(author) == 0 or len(title) == 0 or len(publisher) == 0 or len(year) == 0:
+        return False
     sql = text(
             "INSERT INTO books (key, author, title, year, publisher, volume, pages)"
             "VALUES (:key, :author, :title, :year, :publisher, :volume, :pages)")
@@ -47,6 +49,8 @@ def new_book(key, author, title, year, publisher, volume, pages):
     return True
 
 def new_inproceedings(key, author, title, year, booktitle, pages):
+    if len(author) == 0 or len(title) == 0 or len(booktitle) == 0 or len(year) == 0:
+        return False
     sql = text(
             "INSERT INTO inproceedings (key, author, title, year, booktitle, pages)"
             "VALUES (:key, :author, :title, :year, :booktitle, :pages)")
