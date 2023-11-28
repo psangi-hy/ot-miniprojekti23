@@ -6,12 +6,29 @@ Test Setup  Go To New Page
 
 *** Test Cases ***
 Add Book With Required Content
-    Set Key  Testi00
     Set Author  Book Writer
     Set Title  Test Book
     Set Year  1986
     Submit Content
     Submit Should Succeed  Book Writer  Test Book  
+
+Empty Author
+    Set Title  Empty Book
+    Set Year  1986
+    Submit Content
+    Submit Should Fail  Empty Book
+
+Empty Title
+    Set Author  Test Writer
+    Set Year  2011
+    Submit Content
+    Submit Should Fail  Test Writer
+
+Empty Year
+    Set Author  Test Writer
+    Set Title  Empty Book
+    Submit Content
+    Submit Should Fail  Empty Book
 
 *** Keywords ***
 Submit Should Succeed
@@ -22,10 +39,10 @@ Submit Should Succeed
     Page Should Contain  ${year}
 
 Submit Should Fail
-    [Arguments]  ${argument}
+    [Arguments]  ${parameter}
     Page Should Not Contain  BibTeX Format
     Go To Front Page
-    Page Should Not Contain  ${argument}
+    Page Should Not Contain  ${parameter}
 
 Set Key
     [Arguments]  ${key}
@@ -38,14 +55,14 @@ Set Author
 Set Title
     [Arguments]  ${title}
     Input Text  title  ${title}
-    
-Set Journal
-    [Arguments]  ${journal}
-    Input Text  journal  ${journal}
 
 Set Year
     [Arguments]  ${year}
     Input Text  year  ${year}
+
+Set Publisher
+    [Arguments]  ${publisher}
+    Input Text  publisher  ${publisher}
 
 Set Volume
     [Arguments]  ${volume}

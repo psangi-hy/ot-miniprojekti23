@@ -6,12 +6,17 @@ Test Setup  Go To New Page
 
 *** Test Cases ***
 Add Inproceeding With Required Content
-    Set Key  Testi00
     Set Author  Inproceeding Writer
     Set Title  Test Inproceeding
     Set Year  2000
     Submit Content
     Submit Should Succeed  Inproceeding Writer  Test Inproceeding  2000
+
+Empty Author
+    Set Title  Test Inproceeding
+    Set Year  1999
+    Submit Content
+    Submit Should Fail  Test Inproceeding
 
 *** Keywords ***
 Submit Should Succeed
