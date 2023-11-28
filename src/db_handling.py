@@ -53,7 +53,7 @@ def new_book(key, author, title, year, publisher, volume, pages):
     db.session.commit()
     return True
 
-def new_inproceedings(key, author, title, year, booktitle, pages):
+def new_inproceeding(key, author, title, year, booktitle, pages):
     if len(author) == 0 or len(title) == 0 or len(booktitle) == 0 or len(year) == 0:
         return False
     sql = text(

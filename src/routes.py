@@ -32,8 +32,8 @@ def new():
         elif reference_type == "book":
             if db_handling.new_book(key, author, title, year, journal_or_publisher_or_booktitle, volume, pages):
                 return redirect("/")
-        elif reference_type == "inproceedings":
-            if db_handling.new_inproceedings(key, author, title, year, journal_or_publisher_or_booktitle, pages):
+        elif reference_type == "inproceeding":
+            if db_handling.new_inproceeding(key, author, title, year, journal_or_publisher_or_booktitle, pages):
                 return redirect("/")
 
     return render_template("new.html")
