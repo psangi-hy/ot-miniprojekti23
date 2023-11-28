@@ -2,30 +2,34 @@
 
 {% block title %}New Reference{% endblock %}
 
-
-
 {% block content %}
-{% block dropdown_menu %}
-<div class="form-group">
-    <label for="referenceType">Reference Type:</label>
-    <select class="form-control-dropdown" id="referenceType" name="type" onchange="updateFormFields()">
-        <option value="article">Article</option>
-        <option value="book">Book</option>
-        <option value="inproceeding">Inproceeding</option>
-    </select>
-{% endblock %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        updateFormFields(); 
-    });
-</script>
-    
-    <div class="container mt-4">
-		<h3>New Reference</h3>
-		<br>
-        <!-- Article Form Fields -->
-        <div id="articleFields" style="display: none;">
+<div class="container mt-4">
+    <h3>New Reference</h3>
+    <br>
+    <!-- Dropdown for Reference Type Selection -->
+    <div class="form-group">
+        <label for="referenceType">Reference Type:</label>
+        <select class="form-control-dropdown" id="referenceType" onchange="updateFormFields()">
+            <option value="article">Article</option>
+            <option value="book">Book</option>
+            <option value="inproceeding">Inproceeding</option>
+        </select>
+    </div>
+    <!-- Article Form -->
+    <div id="articleFields" style="display: none;">
         <form method="post" class="needs-validation">
+            <input type="hidden" name="type" value="article">
+            <!-- Dropdown for Reference Type -->
+            <div class="form-group">
+                <label for="referenceTypeArticle">Reference Type:</label>
+                <select class="form-control-dropdown" id="referenceTypeArticle" name="type">
+                    <option value="article" selected>Article</option>
+                    <option value="book">Book</option>
+                    <option value="inproceeding">Inproceeding</option>
+                </select>
+            </div>
+
+            <!-- Article Form Fields -->
             <div class="form-group">
                 <label for="author">Author:</label>
                 <input type="text" class="form-control" name="author" id="author" required>
@@ -53,65 +57,91 @@
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
+
+    <!-- Book Form -->
+    <div id="bookFields" style="display: none;">
+        <form method="post" class="needs-validation">
+            <input type="hidden" name="type" value="book">
+            <!-- Dropdown for Reference Type -->
+            <div class="form-group">
+                <label for="referenceTypeBook">Reference Type:</label>
+                <select class="form-control-dropdown" id="referenceTypeBook" name="type">
+                    <option value="article">Article</option>
+                    <option value="book" selected>Book</option>
+                    <option value="inproceeding">Inproceeding</option>
+                </select>
+            </div>
+
+            <!-- Book Form Fields -->
+            <div class="form-group">
+                <label for="author">Author:</label>
+                <input type="text" class="form-control" name="author" id="author" required>
+            </div>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" name="title" id="title" required>
+            </div>
+            <div class="form-group">
+                <label for="publisher">Publisher:</label>
+                <input type="text" class="form-control" name="publisher" id="publisher" required>
+            </div>
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input type="text" class="form-control" name="year" id="year" required>
+            </div>
+            <div class="form-group">
+                <label for="volume">Volume:</label>
+                <input type="text" class="form-control" name="volume" id="volume">
+            </div>
+            <div class="form-group">
+                <label for="pages">Pages:</label>
+                <input type="text" class="form-control" name="pages" id="pages">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+
+    <!-- Inproceeding Form -->
+    <div id="inproceedingFields" style="display: none;">
+        <form method="post" class="needs-validation">
+            <input type="hidden" name="type" value="inproceeding">
+            <!-- Dropdown for Reference Type -->
+            <div class="form-group">
+                <label for="referenceTypeInproceeding">Reference Type:</label>
+                <select class="form-control-dropdown" id="referenceTypeInproceeding" name="type">
+                    <option value="article">Article</option>
+                    <option value="book">Book</option>
+                    <option value="inproceeding" selected>Inproceeding</option>
+                </select>
+            </div>
+
+            <!-- Inproceeding Form Fields -->
+            <div class="form-group">
+                <label for="author">Author:</label>
+                <input type="text" class="form-control" name="author" id="author" required>
+            </div>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" name="title" id="title" required>
+            </div>
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input type="text" class="form-control" name="year" id="year" required>
+            </div>
+            <div class="form-group">
+                <label for="booktitle">Booktitle:</label>
+                <input type="text" class="form-control" name="booktitle" id="booktitle">
+            </div>
+            <div class="form-group">
+                <label for="pages">Pages:</label>
+                <input type="text" class="form-control" name="pages" id="pages">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
 </div>
-<!-- Book Form Fields -->
-<div id="bookFields" style="display: none;">
-    <form method="post" class="needs-validation">
-        <div class="form-group">
-            <label for="author">Author:</label>
-            <input type="text" class="form-control" name="author" id="author" required>
-        </div>
-        <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" class="form-control" name="title" id="title" required>
-        </div>
-        <div class="form-group">
-            <label for="journal">Publisher:</label>
-            <input type="text" class="form-control" name="journal" id="publisher" required>
-        </div>
-        <div class="form-group">
-            <label for="year">Year:</label>
-            <input type="text" class="form-control" name="year" id="year" required>
-        </div>
-        <div class="form-group">
-            <label for="volume">Volume:</label>
-            <input type="text" class="form-control" name="volume" id="volume">
-        </div>
-        <div class="form-group">
-            <label for="pages">Pages:</label>
-            <input type="text" class="form-control" name="pages" id="pages">
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-    </form>
-</div>
-</div>
-<!-- Inproceeding Form Fields -->
-<div id="inproceedingFields" style="display: none;">
-    <form method="post" class="needs-validation">
-        <div class="form-group">
-            <label for="author">Author:</label>
-            <input type="text" class="form-control" name="author" id="author" required>
-        </div>
-        <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" class="form-control" name="title" id="title" required>
-        </div>
-        <div class="form-group">
-            <label for="year">Year:</label>
-            <input type="text" class="form-control" name="year" id="year" required>
-        </div>
-        <div class="form-group">
-            <label for="volume">Booktitle:</label>
-            <input type="text" class="form-control" name="volume" id="volume">
-        </div>
-        <div class="form-group">
-            <label for="pages">Pages:</label>
-            <input type="text" class="form-control" name="pages" id="pages">
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-    </form>
-</div>
-</div>
+
+
 <script>
     function updateFormFields() {
         var selection = document.getElementById('referenceType').value;
@@ -119,11 +149,12 @@
         document.getElementById('bookFields').style.display = (selection === 'book') ? 'block' : 'none';
         document.getElementById('inproceedingFields').style.display = (selection === 'inproceeding') ? 'block' : 'none';
     }
-</script>
-<script>
+
+    // Initialize the forms display on page load
     document.addEventListener('DOMContentLoaded', function() {
         updateFormFields(); 
     });
-    </script>
+</script>
+
 
 {% endblock %}
