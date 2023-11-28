@@ -21,7 +21,7 @@ def new():
     pages = request.form["pages"]
 
     # Luo key käyttäen authorin isoja kirjaimia, julkaisu vuotta, painosta ja sivunumeroita
-    key = f"{''.join(word[0].upper() for word in author.split())}{year}{volume}{''.join(char for char in pages if char.isdigit())}"
+    key = db_handling.bibtexgen(author,year,volume,pages)
 
     if db_handling.new_article(key, author, title, journal, year, volume, pages):
         return redirect("/")

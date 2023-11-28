@@ -34,3 +34,8 @@ def drop_tables():
 def reset_tests():
     drop_tables()
     run_sql_schema()
+
+def bibtexgen(author,year,volume,pages):
+    key = f"{''.join(word[0].upper() for word in author.split())}{year}{volume}{''.join(char for char in pages if char.isdigit())}"
+    
+    return key
