@@ -5,9 +5,9 @@ import db_handling
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    articles = list(db_handling.select_all_articles())
-    books = list(db_handling.select_all_books())
-    inproceedings = list(db_handling.select_all_inproceedings())
+    articles = db_handling.select_all_articles()
+    books = db_handling.select_all_books()
+    inproceedings = db_handling.select_all_inproceedings()
     return render_template("index.html", items=articles, books=books, inproceedings=inproceedings)
 
 
