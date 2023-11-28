@@ -71,7 +71,10 @@ def new_inproceedings(key, author, title, year, booktitle, pages):
 def drop_tables():
     sql = text(
         "DROP TABLE IF EXISTS articles;"
+        "DROP TABLE IF EXISTS books;"
+        "DROP TABLE IF EXISTS inproceedings;"
     )
+
     db.session.execute(sql)
     db.session.commit()
 
