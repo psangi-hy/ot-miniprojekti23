@@ -38,3 +38,17 @@ body {
     padding: 5px;
 	overflow-x: auto;
 }
+
+.form-control-dropdown {
+    width: 50%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    place-items: center;
+}
+
+.form-group {
+    display: grid;
+    place-items: center;
+}
