@@ -46,7 +46,7 @@ def new_book(key, author, title, year, publisher, volume, pages):
     db.session.commit()
     return True
 
-def new_inproceeding(key, author, title, year, booktitle, pages):
+def new_inproceedings(key, author, title, year, booktitle, pages):
     sql = text(
             "INSERT INTO inproceedings (key, author, title, year, booktitle, pages)"
             "VALUES (:key, :author, :title, :year, :booktitle, :pages)")
