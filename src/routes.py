@@ -8,7 +8,7 @@ def index():
     articles = list(db_handling.select_all_articles())
     books = list(db_handling.select_all_books())
     inproceedings = list(db_handling.select_all_inproceedings())
-    return render_template("index.html", items=articles, books=books, inproceedings=inproceedings)
+    return render_template("index.html", articles=articles, books=books, inproceedings=inproceedings)
 
 
 @app.route("/new", methods=["GET", "POST"])
