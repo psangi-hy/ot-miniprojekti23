@@ -82,7 +82,12 @@ def reset_tests():
     drop_tables()
     run_sql_schema()
 
-def bibtexgen(author,year,volume,pages):
+def bibtexgen(author,year,volume = None, pages = None):
+    if volume is None or volume == "":
+        volume = "0"
+    if pages is None or pages == "":
+        pages = "0"
+    
     key = f"{''.join(word[0].upper() for word in author.split())}{year}{volume}{''.join(char for char in pages if char.isdigit())}"
 
     return key
