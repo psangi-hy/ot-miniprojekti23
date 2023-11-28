@@ -4,7 +4,7 @@ Library  ./AppLibrary.py
 
 *** Variables ***
 ${SERVER}  localhost:5001
-${DELAY}  0.5 seconds
+${DELAY}  0.0 seconds
 ${HOME URL}  http://${SERVER}
 ${NEW URL}  http://${SERVER}/new
 
@@ -30,7 +30,7 @@ Select Article
 
 Select Book
     Go To New Page
-    Select From List By Value  id:referenceType  book
+    Execute JavaScript  document.getElementById('referenceType').value='book'; updateFormFields();
     Wait Until Element Is Visible  id:bookFields  5s
 
 Select Inproceeding
