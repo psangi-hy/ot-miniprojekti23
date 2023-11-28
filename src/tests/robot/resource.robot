@@ -4,7 +4,7 @@ Library  ./AppLibrary.py
 
 *** Variables ***
 ${SERVER}  localhost:5001
-${DELAY}  0.0 seconds
+${DELAY}  0.5 seconds
 ${HOME URL}  http://${SERVER}
 ${NEW URL}  http://${SERVER}/new
 
@@ -37,7 +37,6 @@ Select Inproceeding
     Go To New Page
     Click Element  id:referenceType
     Select From List By Value  id:referenceType  inproceeding
-    Wait Until Element Is Visible  id:inproceedingFields  5s
 
 Go To New Page
     Go To  ${NEW URL}
