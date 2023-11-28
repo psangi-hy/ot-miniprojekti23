@@ -2,12 +2,12 @@ body {
 	font-family: Arial, sans-serif;
 }
 
-.articles-table table {
+.articles-table table, .books-table table, .inproceedings-table table {
 	width: 100%;
 	border-collapse: collapse;
 }
 
-.articles-table th, .articles-table td {
+.articles-table th, .articles-table td, .books-table th, .books-table td, .inproceedings-table th, .inproceedings-table td{
 	border: 1px solid #ddd;
 	padding: 8px;
 	text-align: left;

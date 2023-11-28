@@ -3,7 +3,6 @@
 {% block title %}References{% endblock %}
 
 {% block content %}
-	{% if items %}
 	<h3>Articles</h3>
 	<div class="articles-table">
 		<table>
@@ -31,6 +30,58 @@
 			</tbody>
 		</table>
 	</div>
+	<h3>Books</h3>
+	<div class="books-table">
+		<table>
+			<thead>
+				<tr>
+					<th>Author</th>
+					<th>Title</th>
+					<th>Publisher</th>
+					<th>Year</th>
+					<th>Volume</th>
+					<th>Pages</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for book in books %}
+				<tr>
+					<td>{{ book.author}}</td>
+					<td>{{ book.title}}</td>
+					<td>{{ book.publisher or 'N/A' }}</td>
+					<td>{{ book.year or 'N/A' }}</td>
+					<td>{{ book.volume or 'N/A' }}</td>
+					<td>{{ book.pages or 'N/A' }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<h3>Articles</h3>
+	<div class="inproceedings-table">
+		<table>
+			<thead>
+				<tr>
+					<th>Author</th>
+					<th>Title</th>
+					<th>Year</th>
+					<th>Booktitle</th>
+					<th>Pages</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for inproceeding in inproceedings %}
+				<tr>
+					<td>{{ inproceeding.author}}</td>
+					<td>{{ inproceeding.title}}</td>
+					<td>{{ inproceeding.year or 'N/A' }}</td>
+					<td>{{ inproceeding.booktitle or 'N/A' }}</td>
+					<td>{{ inproceeding.pages or 'N/A' }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 	<br><br>
     <h2>BibTeX Format</h2>
     <div class="bibtex-container">
@@ -48,7 +99,4 @@
         </div>
         {% endfor %}
     </div>
-	{% else %}
-	<p>There is nothing here yet.</p>
-	{% endif %}
 {% endblock %}
