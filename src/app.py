@@ -21,8 +21,12 @@ def run_sql_schema():
     with open(schema_path, 'r') as file:
         sql_schema = file.read()
 
+    statements = sql_schema.split(';')
+
     with db.engine.connect() as connection:
-        connection.execute(sqlalchemy.text(sql_schema))
+        for statement in statements:
+            if statement.strip():
+                connection.execute(sqlalchemy.text(statement.strip() + ';'))
 
 with app.app_context():
     # Check if the database file exists
