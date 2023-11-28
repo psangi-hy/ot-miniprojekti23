@@ -15,15 +15,15 @@ def index():
 def new():
     if request.method == "GET":
         return render_template("new.html")
-    reference_type = request.form["type"]
-    author = request.form["author"]
-    year = request.form["year"]
-    volume = request.form["volume"]
-    title = request.form["title"]
-    journal = request.form["journal"]
-    pages = request.form["pages"]
-    publisher = request.form["publisher"]
-    booktitle = request.form["booktitle"]
+    reference_type = request.form.get("type", default="")
+    author = request.form.get("author", default="")
+    year = request.form.get("year", default="")
+    volume = request.form.get("volume", default="")
+    title = request.form.get("title", default="")
+    journal = request.form.get("journal", default="")
+    pages = request.form.get("pages", default="")
+    publisher = request.form.get("publisher", default="")
+    booktitle = request.form.get("booktitle", default="")
 
     # Luo key käyttäen authorin isoja kirjaimia, julkaisu vuotta, painosta ja sivunumeroita
     key = db_handling.bibtexgen(author,year,volume,pages)
