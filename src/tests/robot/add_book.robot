@@ -2,12 +2,13 @@
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Go To New Page
+Test Setup  Select Book
 
 *** Test Cases ***
 Add Book With Required Content
     Set Author  Book Writer
     Set Title  Test Book
+    Set Publisher  Publishing House
     Set Year  1986
     Submit Content
     Submit Should Succeed  Book Writer  Test Book  
@@ -43,10 +44,6 @@ Submit Should Fail
     Page Should Not Contain  BibTeX Format
     Go To Front Page
     Page Should Not Contain  ${parameter}
-
-Set Key
-    [Arguments]  ${key}
-    Input Text  key  ${key}
 
 Set Author
     [Arguments]  ${author}

@@ -23,6 +23,21 @@ Open And Configure Browser
 Front Page Should Be Open
     Title Should Be  New Reference
 
+Select Article
+    Go To New Page
+    Click Element  id:referenceType
+    Select From List By Value  id:referenceType  article
+
+Select Book
+    Go To New Page
+    Click Element  id:referenceType
+    Select From List By Value  id:referenceType  book
+
+Select Inproceeding
+    Go To New Page
+    Click Element  id:referenceType
+    Select From List By Value  id:referenceType  inproceeding
+
 Go To New Page
     Go To  ${NEW URL}
 

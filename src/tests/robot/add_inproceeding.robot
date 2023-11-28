@@ -2,7 +2,7 @@
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Go To New Page
+Test Setup  Select Inproceeding
 
 *** Test Cases ***
 Add Inproceeding With Required Content
