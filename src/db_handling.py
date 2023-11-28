@@ -3,18 +3,23 @@ from sqlalchemy.sql import text
 from app import run_sql_schema
 from db import db
 
+def select_all(table):
+    sql = text(f"SELECT * FROM {table}")
+    result = db.session.execute(sql)
+    return result.all()
+
+
 def select_all_articles():
-    sql = text("SELECT * FROM articles")
-    result = db.session.execute(sql)
-    return result
+    return select_all("articles")
+
+
 def select_all_books():
-    sql = text("SELECT * FROM books")
-    result = db.session.execute(sql)
-    return result
+    return select_all("books")
+
+
 def select_all_inproceedings():
-    sql = text("SELECT * FROM inproceedings")
-    result = db.session.execute(sql)
-    return result
+    return select_all("inproceedings")
+
 
 def new_article(key, author, title, journal, year, volume, pages):
     if len(key) == 0 or len(author) == 0 or len(title) == 0  or len(journal) == 0 or len(year) == 0:
