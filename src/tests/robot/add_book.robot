@@ -7,6 +7,7 @@ Test Setup  Select Book
 *** Test Cases ***
 Add Book With Required Content
     Select Book
+    Wait Until Element Is Visible  id:author  5s
     Set Author  Book Writer
     Set Title  Test Book
     Set Publisher  Publishing House
