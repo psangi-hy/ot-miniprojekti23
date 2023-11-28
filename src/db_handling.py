@@ -7,6 +7,14 @@ def select_all_articles():
     sql = text("SELECT * FROM articles")
     result = db.session.execute(sql)
     return result
+def select_all_books():
+    sql = text("SELECT * FROM books")
+    result = db.session.execute(sql)
+    return result
+def select_all_inproceedings():
+    sql = text("SELECT * FROM inproceedings")
+    result = db.session.execute(sql)
+    return result
 
 def new_article(key, author, title, journal, year, volume, pages):
     if len(key)== 0 or len(author) == 0 or len(year) == 0 or len(journal) == 0 or len(title) == 0:
@@ -24,6 +32,33 @@ def new_article(key, author, title, journal, year, volume, pages):
     db.session.commit()
     return True
 
+def new_book(key, author, title, year, publisher, volume, pages):
+    sql = text(
+            "INSERT INTO books (key, author, title, year, publisher, volume, pages)"
+            "VALUES (:key, :author, :title, :year, :publisher, :volume, :pages)")
+    db.session.execute(sql, {"key": key,
+                             "author": author,
+                             "title": title,
+                             "year": year,
+                             "publisher": publisher,
+                             "volume": volume,
+                             "pages": pages})
+    db.session.commit()
+    return True
+
+def new_inproceeding(key, author, title, year, booktitle, pages):
+    sql = text(
+            "INSERT INTO inproceedings (key, author, title, year, booktitle, pages)"
+            "VALUES (:key, :author, :title, :year, :booktitle, :pages)")
+    db.session.execute(sql, {"key": key,
+                             "author": author,
+                             "title": title,
+                             "year": year,
+                             "booktitle": booktitle,
+                             "pages": pages})
+    db.session.commit()
+    return True
+
 def drop_tables():
     sql = text(
         "DROP TABLE IF EXISTS articles;"
@@ -34,8 +69,3 @@ def drop_tables():
 def reset_tests():
     drop_tables()
     run_sql_schema()
-
-def bibtexgen(author,year,volume,pages):
-    key = f"{''.join(word[0].upper() for word in author.split())}{year}{volume}{''.join(char for char in pages if char.isdigit())}"
-    
-    return key
