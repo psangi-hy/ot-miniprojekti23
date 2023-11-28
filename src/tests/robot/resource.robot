@@ -21,7 +21,7 @@ Open And Configure Browser
     Set Selenium Speed  ${DELAY}
 
 Front Page Should Be Open
-    Title Should Be  References
+    Title Should Be  New Reference
 
 Go To New Page
     Go To  ${NEW URL}
