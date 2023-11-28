@@ -30,7 +30,6 @@ Select Article
 
 Select Book
     Go To New Page
-    Click Element  id:referenceType
     Select From List By Value  id:referenceType  book
     Wait Until Element Is Visible  id:bookFields  5s
 
