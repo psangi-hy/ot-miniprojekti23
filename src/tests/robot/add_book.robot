@@ -6,6 +6,7 @@ Test Setup  Select Book
 
 *** Test Cases ***
 Add Book With Required Content
+    Select Book
     Set Author  Book Writer
     Set Title  Test Book
     Set Publisher  Publishing House
