@@ -22,8 +22,8 @@
 				<tr>
 					<td>{{ article.author}}</td>
 					<td>{{ article.title}}</td>
-					<td>{{ article.journal or 'N/A' }}</td>
-					<td>{{ article.year or 'N/A' }}</td>
+					<td>{{ article.journal}}</td>
+					<td>{{ article.year}}</td>
 					<td>{{ article.volume or 'N/A' }}</td>
 					<td>{{ article.pages or 'N/A' }}</td>
 				</tr>
@@ -65,8 +65,8 @@
 				<tr>
 					<td>{{ book.author}}</td>
 					<td>{{ book.title}}</td>
-					<td>{{ book.publisher or 'N/A' }}</td>
-					<td>{{ book.year or 'N/A' }}</td>
+					<td>{{ book.publisher}}</td>
+					<td>{{ book.year}}</td>
 					<td>{{ book.volume or 'N/A' }}</td>
 					<td>{{ book.pages or 'N/A' }}</td>
 				</tr>
@@ -97,8 +97,8 @@
 				<tr>
 					<th>Author</th>
 					<th>Title</th>
-					<th>Year</th>
 					<th>Booktitle</th>
+					<th>Year</th>
 					<th>Pages</th>
 				</tr>
 			</thead>
@@ -107,8 +107,8 @@
 				<tr>
 					<td>{{ inproceeding.author}}</td>
 					<td>{{ inproceeding.title}}</td>
-					<td>{{ inproceeding.year or 'N/A' }}</td>
-					<td>{{ inproceeding.booktitle or 'N/A' }}</td>
+					<td>{{ inproceeding.booktitle}}</td>
+					<td>{{ inproceeding.year}}</td>
 					<td>{{ inproceeding.pages or 'N/A' }}</td>
 				</tr>
 				{% endfor %}
