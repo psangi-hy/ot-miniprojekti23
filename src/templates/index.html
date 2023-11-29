@@ -37,12 +37,11 @@
 		<div class="bibtex-entry">
 			<pre>
 @article{ {{- article.key -}},
-    author = { {{- article.author -}} },
-    title = { {{- article.title -}} },
-    journal = { {{- article.journal -}} },
-    year = { {{- article.year -}} },
-    volume = { {{- article.volume -}} },
-    pages = { {{- article.pages -}} },
+{%- for field in ["author", "title", "journal", "year", "volume", "pages"] %}
+{%- if article[field] %}
+	{{ field }} = { {{- article[field] -}} },
+{%- endif %}
+{%- endfor %}
 }</pre>
 		</div>
 		{% endfor %}
@@ -81,12 +80,11 @@
 		<div class="bibtex-entry">
 			<pre>
 @book{ {{- book.key -}},
-    author = { {{- book.author -}} },
-    title = { {{- book.title -}} },
-    publisher = { {{- book.publisher -}} },
-    year = { {{- book.year -}} },
-    volume = { {{- book.volume -}} },
-    pages = { {{- book.pages -}} },
+{%- for field in ["author", "title", "publisher", "year", "volume", "pages"] %}
+{%- if book[field] %}
+	{{ field }} = { {{- book[field] -}} },
+{%- endif %}
+{%- endfor %}
 }</pre>
 		</div>
 		{% endfor %}
@@ -123,11 +121,11 @@
 		<div class="bibtex-entry">
 			<pre>
 @inproceedings{ {{- inproceeding.key -}},
-    author = { {{- inproceeding.author -}} },
-    title = { {{- inproceeding.title -}} },
-    booktitle = { {{- inproceeding.booktitle -}} },
-    year = { {{- inproceeding.year -}} },
-    pages = { {{- inproceeding.pages -}} },
+{%- for field in ["author", "title", "booktitle", "year", "pages"] %}
+{%- if inproceeding[field] %}
+	{{ field }} = { {{- inproceeding[field] -}} },
+{%- endif %}
+{%- endfor %}
 }</pre>
 		</div>
 		{% endfor %}
