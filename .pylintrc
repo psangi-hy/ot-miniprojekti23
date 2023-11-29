@@ -4,7 +4,11 @@ ignore=tests
 
 [MESSAGE CONTROL]
 disable=missing-function-docstring,
-	missing-module-docstring
+	missing-module-docstring,
+	import-error,
+	cycling-import,
+	unused-import,
+	wrong-import-position
 
 [FORMAT]
 
