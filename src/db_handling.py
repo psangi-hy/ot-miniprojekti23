@@ -19,9 +19,32 @@ def select_all_books():
 def select_all_inproceedings():
     return select_all("inproceedings")
 
+def validate_as_numbers(numbers):
+    try:
+        numbers = int(numbers)
+        return True
+    except ValueError:
+        return False
+
+def validate_year(year):
+    return validate_as_numbers(year)
+
+def validate_pages(pages):
+    if len(pages) == 0:
+        return True
+    pages = pages.replace("-", "").replace(" ", "")
+    return validate_as_numbers(pages)
+
+def validate_volume(volume):
+    if len(volume) == 0:
+        return True
+    return validate_as_numbers(volume)
+
 
 def new_article(key, author, title, journal, year, volume, pages):
     if len(key) == 0 or len(author) == 0 or len(title) == 0  or len(journal) == 0 or len(year) == 0:
+        return False
+    if not validate_year(year) or not validate_pages(pages) or not validate_volume(volume):
         return False
     sql = text(
             "INSERT INTO articles (key, author, title, journal, year, volume, pages)"
@@ -39,6 +62,8 @@ def new_article(key, author, title, journal, year, volume, pages):
 def new_book(key, author, title, year, publisher, volume, pages):
     if len(key)== 0 or len(author) == 0 or len(title) == 0 or len(publisher) == 0 or len(year) == 0:
         return False
+    if not validate_year(year) or not validate_pages(pages) or not validate_volume(volume):
+        return False
     sql = text(
             "INSERT INTO books (key, author, title, year, publisher, volume, pages)"
             "VALUES (:key, :author, :title, :year, :publisher, :volume, :pages)")
@@ -54,6 +79,8 @@ def new_book(key, author, title, year, publisher, volume, pages):
 
 def new_inproceeding(key, author, title, year, booktitle, pages):
     if len(author) == 0 or len(title) == 0 or len(booktitle) == 0 or len(year) == 0:
+        return False
+    if not validate_year(year) or not validate_pages(pages):
         return False
     sql = text(
             "INSERT INTO inproceedings (key, author, title, year, booktitle, pages)"
