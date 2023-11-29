@@ -42,7 +42,7 @@ def validate_volume(volume):
 
 
 def new_article(key, author, title, journal, year, volume, pages):
-    if len(key) == 0 or len(author) == 0 or len(title) == 0  or len(journal) == 0 or len(year) == 0:
+    if len(key) == 0 or len(author) == 0 or len(title) == 0  or len(journal) == 0 or year is None:
         return False
     if not validate_year(year) or not validate_pages(pages) or not validate_volume(volume):
         return False
@@ -113,7 +113,7 @@ def bibtexgen(author,year,volume = None, pages = None):
         volume = "0"
     if pages is None or pages == "":
         pages = "0"
-
-    key = f"{''.join(word[0].upper() for word in author.split())}{year}{volume}{''.join(char for char in pages if char.isdigit())}"
-
+    initials = ''.join(word[0].upper() for word in author.split())
+    pages = ''.join(char for char in pages if char.isdigit())
+    key = f"{initials}{year}{volume}{pages}"
     return key
