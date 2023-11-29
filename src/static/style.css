@@ -13,7 +13,7 @@ body {
 	text-align: left;
 }
 
-.articles-table th {
+.articles-table th, .books-table th, .inproceedings-table th {
 	background-color: #f2f2f2;
 }
 
