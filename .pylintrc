@@ -6,9 +6,10 @@ ignore=tests
 disable=missing-function-docstring,
 	missing-module-docstring,
 	import-error,
-	cycling-import,
+	cyclic-import,
 	unused-import,
-	wrong-import-position
+	wrong-import-position,
+	broad-exception-caught
 
 [FORMAT]
 
