@@ -1,6 +1,7 @@
 # Elastinen
 
 [![GHA workflow badge](https://github.com/psangi-hy/ot-miniprojekti23/workflows/CI/badge.svg)](https://github.com/psangi-hy/ot-miniprojekti23/actions)
+[![codecov](https://codecov.io/gh/psangi-hy/ot-miniprojekti23/graph/badge.svg?token=XGDOK7GYJE)](https://codecov.io/gh/psangi-hy/ot-miniprojekti23)
 
 
  [Backlog (Google Docs)](https://docs.google.com/spreadsheets/d/17COsn4LBcv9tK5OwG2H8qlhSb43Yw5VLccIJSeliQN4/edit#gid=0)
