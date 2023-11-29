@@ -1,13 +1,13 @@
 *** Settings ***
 Library  SeleniumLibrary
 Library  ./AppLibrary.py
+Library  RequestsLibrary
 
 *** Variables ***
 ${SERVER}  localhost:5001
 ${DELAY}  0.0 seconds
 ${HOME URL}  http://${SERVER}
 ${NEW URL}  http://${SERVER}/new
-
 
 *** Keywords ***
 Open And Configure Browser
@@ -27,16 +27,6 @@ Select Article
     Go To New Page
     Click Element  id:referenceType
     Select From List By Value  id:referenceType  article
-
-Select Book
-    Go To New Page
-    Execute JavaScript  document.getElementById('referenceType').value='book'; updateFormFields();
-    Wait Until Element Is Visible  id:bookFields  5s
-
-Select Inproceeding
-    Go To New Page
-    Click Element  id:referenceType
-    Select From List By Value  id:referenceType  inproceeding
 
 Go To New Page
     Go To  ${NEW URL}

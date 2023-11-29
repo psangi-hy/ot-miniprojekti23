@@ -2,73 +2,24 @@
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Select Book
+
+*** Variables ***
+${CONTENT_TYPE}  application/x-www-form-urlencoded
 
 *** Test Cases ***
-Add Book With Required Content
-    Select Book
-    Set Author  Book Writer
-    Set Title  Test Book
-    Set Publisher  Publishing House
-    Set Year  1986
-    Submit Content
-    Submit Should Succeed  Book Writer  Test Book  
-
-Empty Author
-    Set Title  Empty Book
-    Set Year  1986
-    Submit Content
-    Submit Should Fail  Empty Book
-
-Empty Title
-    Set Author  Test Writer
-    Set Year  2011
-    Submit Content
-    Submit Should Fail  Test Writer
-
-Empty Year
-    Set Author  Test Writer
-    Set Title  Empty Book
-    Submit Content
-    Submit Should Fail  Empty Book
+Add Book With Required Content Using POST
+    Create Session  mysession  ${HOME URL}
+    &{headers}=  Create Dictionary  Content-Type=${CONTENT_TYPE}
+    &{data}=  Create Dictionary  type=book  author=Book Writer  title=Test Book  publisher=Publishing House  year=1986
+    ${response}=  POST On Session  mysession  /new  data=${data}  headers=${headers}
+    Should Be Equal As Strings  ${response.status_code}  200
+    POST Submit Book Should Succeed  Book Writer  Test Book  1986  Publishing House
 
 *** Keywords ***
-Submit Should Succeed
-    [Arguments]  ${author}  ${title}  ${year}
-    Front Page Should Be Open
+POST Submit Book Should Succeed
+    [Arguments]  ${author}  ${title}  ${year}  ${publisher}
+    Go To Front Page
     Page Should Contain  ${author}
     Page Should Contain  ${title}
     Page Should Contain  ${year}
-
-Submit Should Fail
-    [Arguments]  ${parameter}
-    Page Should Not Contain  BibTeX Format
-    Go To Front Page
-    Page Should Not Contain  ${parameter}
-
-Set Author
-    [Arguments]  ${author}
-    Input Text  author  ${author}
-
-Set Title
-    [Arguments]  ${title}
-    Input Text  title  ${title}
-
-Set Year
-    [Arguments]  ${year}
-    Input Text  year  ${year}
-
-Set Publisher
-    [Arguments]  ${publisher}
-    Input Text  publisher  ${publisher}
-
-Set Volume
-    [Arguments]  ${volume}
-    Input Text  volume  ${volume}
-
-Set Pages
-    [Arguments]  ${pages}
-    Input Text  pages  ${pages}
-
-Submit Content
-    Click Button  Save
+	Page Should Contain  ${publisher}

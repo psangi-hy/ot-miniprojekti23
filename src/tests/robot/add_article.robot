@@ -6,7 +6,6 @@ Test Setup  Select Article
 
 *** Test Cases ***
 Add Article With All Content
-    Select Article
     Set Author  Test Author
     Set Title  Great Article
     Set Journal  Testi

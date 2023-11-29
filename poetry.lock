@@ -772,6 +772,24 @@ files = [
 ]
 
 [[package]]
+name = "robotframework-requests"
+version = "0.9.6"
+description = "Robot Framework keyword library wrapper around requests"
+optional = false
+python-versions = "*"
+files = [
+    {file = "robotframework-requests-0.9.6.tar.gz", hash = "sha256:818546df98d78f948be204f328a1f8e319480453cfd673603647b9530f8d974f"},
+    {file = "robotframework_requests-0.9.6-py3-none-any.whl", hash = "sha256:57319f6b4508ab6557332b0328364d3e28c143a99fce195f4247999b25e26284"},
+]
+
+[package.dependencies]
+requests = "*"
+robotframework = "*"
+
+[package.extras]
+test = ["coverage", "flake8", "flask", "pytest", "robotframework (>=3.2.1)", "six"]
+
+[[package]]
 name = "robotframework-seleniumlibrary"
 version = "6.1.3"
 description = "Web testing library for Robot Framework"
@@ -1035,4 +1053,4 @@ h11 = ">=0.9.0,<1"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "4955d88dc02bfa5fe45491c5bb0bd355dd7f069d97c37fdd95eb4c0ff32451b5"
+content-hash = "8d0169ba3cf4f73f4e877336f8d65bfa3eb18966edf6b99c53b7351a9aa54df9"
