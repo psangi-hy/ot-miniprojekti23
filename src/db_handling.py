@@ -1,4 +1,3 @@
-import os
 from sqlalchemy.sql import text
 from app import run_sql_schema
 from db import db
@@ -72,7 +71,7 @@ def drop_tables():
     sql_statements = [text("DROP TABLE IF EXISTS articles;"),
         text("DROP TABLE IF EXISTS books;"),
         text("DROP TABLE IF EXISTS inproceedings;")]
-    
+
     for statement in sql_statements:
         db.session.execute(statement)
 
@@ -87,7 +86,7 @@ def bibtexgen(author,year,volume = None, pages = None):
         volume = "0"
     if pages is None or pages == "":
         pages = "0"
-    
+
     key = f"{''.join(word[0].upper() for word in author.split())}{year}{volume}{''.join(char for char in pages if char.isdigit())}"
 
     return key

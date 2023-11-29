@@ -28,3 +28,5 @@ jobs:
         run: bash <(curl -s https://codecov.io/bash)
       - name: Run robot tests
         run: bash run_robot_tests.sh
+      - name: Run pylint checks
+        run: poetry run pylint src
