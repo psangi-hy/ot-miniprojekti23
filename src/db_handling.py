@@ -113,7 +113,7 @@ def bibtexgen(author,year,volume = None, pages = None):
         volume = "0"
     if pages is None or pages == "":
         pages = "0"
-
-    key = f"{''.join(word[0].upper() for word in author.split())}{year}{volume}{''.join(char for char in pages if char.isdigit())}"
-
+    initials = ''.join(word[0].upper() for word in author.split())
+    pages = ''.join(char for char in pages if char.isdigit())
+    key = f"{initials}{year}{volume}{pages}"
     return key
