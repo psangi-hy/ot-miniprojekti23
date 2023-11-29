@@ -42,7 +42,7 @@ def validate_volume(volume):
 
 
 def new_article(key, author, title, journal, year, volume, pages):
-    if len(key) == 0 or len(author) == 0 or len(title) == 0  or len(journal) == 0 or len(year) == 0:
+    if len(key) == 0 or len(author) == 0 or len(title) == 0  or len(journal) == 0 or year is None:
         return False
     if not validate_year(year) or not validate_pages(pages) or not validate_volume(volume):
         return False
@@ -60,7 +60,7 @@ def new_article(key, author, title, journal, year, volume, pages):
     return True
 
 def new_book(key, author, title, year, publisher, volume, pages):
-    if len(key)== 0 or len(author) == 0 or len(title) == 0 or len(publisher) == 0 or len(year) == 0:
+    if len(key)== 0 or len(author) == 0 or len(title) == 0 or len(publisher) == 0 or year is None:
         return False
     if not validate_year(year) or not validate_pages(pages) or not validate_volume(volume):
         return False
@@ -78,7 +78,7 @@ def new_book(key, author, title, year, publisher, volume, pages):
     return True
 
 def new_inproceeding(key, author, title, year, booktitle, pages):
-    if len(author) == 0 or len(title) == 0 or len(booktitle) == 0 or len(year) == 0:
+    if len(author) == 0 or len(title) == 0 or len(booktitle) == 0 or year is None:
         return False
     if not validate_year(year) or not validate_pages(pages):
         return False
