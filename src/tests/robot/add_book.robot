@@ -41,14 +41,14 @@ Missing Year Field Using POST
 
 *** Keywords ***
 POST Submit Book Should Succeed
-    [Arguments]  ${author}  ${title}  ${year}
+    [Arguments]  ${author}  ${title}  ${year}  ${publisher}
     Go To Front Page
     Page Should Contain  ${author}
     Page Should Contain  ${title}
     Page Should Contain  ${year}
 
 POST Submit Book Should Fail
-    [Arguments]  ${author}  ${title}  ${year}
+    [Arguments]  ${author}  ${title}  ${year}  ${publisher}
     Go To Front Page
     Page Should Not Contain  ${author}
     Page Should Not Contain  ${title}
