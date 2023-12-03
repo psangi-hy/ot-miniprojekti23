@@ -13,7 +13,7 @@ Add Inproceeding With Required Content Using POST
     &{data}=  Create Dictionary  type=inproceeding  author=Inproceeding Writer  title=Test Inproc.  year=2005  booktitle=Robot Tests
     ${response}=  POST On Session  mysession  /new  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${response.status_code}  200
-    POST Submit Inproceeding Should Succeed  Inproceeding Writer  Test Inproc.  2005
+    POST Submit Inproceeding Should Succeed  Inproceeding Writer  Test Inproc.  2005  Robot Tests
 
 Missing Author Field Using POST
     Create Session  mysession  ${HOME URL}
