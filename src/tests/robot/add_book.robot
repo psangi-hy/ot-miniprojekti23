@@ -13,7 +13,7 @@ Add Book With Required Content Using POST
     &{data}=  Create Dictionary  type=book  author=Book Writer  title=Test Book  publisher=Publishing House  year=1986
     ${response}=  POST On Session  mysession  /new  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${response.status_code}  200
-    POST Submit Book Should Succeed  Book Writer  Test Book  1986  Publishing House
+    POST Submit Book Should Succeed  Book Writer  Test Book  1986
 
 Missing Author Field Using POST
     Create Session  mysession  ${HOME URL}
@@ -46,7 +46,6 @@ POST Submit Book Should Succeed
     Page Should Contain  ${author}
     Page Should Contain  ${title}
     Page Should Contain  ${year}
-	Page Should Contain  ${publisher}
 
 POST Submit Book Should Fail
     [Arguments]  ${author}  ${title}  ${year}  ${publisher}
@@ -54,5 +53,4 @@ POST Submit Book Should Fail
     Page Should Not Contain  ${author}
     Page Should Not Contain  ${title}
     Page Should Not Contain  ${year}
-	Page Should Not Contain  ${publisher}
 

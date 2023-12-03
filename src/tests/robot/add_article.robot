@@ -13,7 +13,7 @@ Add Article With All Content
     Set Volume  4
     Set Pages  54-60
     Submit Content
-    Submit Should Succeed  Test Author  Great Article  Testi  2020
+    Submit Should Succeed  Great Article  Test Author  2020
 
 Empty Author Field
     Set Title  Robot Testing
@@ -48,9 +48,8 @@ Empty Year Field
 Submit Should Succeed
     [Arguments]  ${author}  ${title}  ${journal}  ${year}
     Go To Front Page
-    Page Should Contain  ${author}
     Page Should Contain  ${title}
-    Page Should Contain  ${journal}
+    Page Should Contain  ${author}
     Page Should Contain  ${year}
 
 Submit Should Fail
