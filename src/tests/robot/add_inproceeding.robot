@@ -41,14 +41,14 @@ Missing Year Field Using POST
 
 *** Keywords ***
 POST Submit Inproceeding Should Succeed
-    [Arguments]  ${author}  ${title}  ${year}  ${booktitle}
+    [Arguments]  ${author}  ${title}  ${year}
     Go To Front Page
     Page Should Contain  ${author}
     Page Should Contain  ${title}
     Page Should Contain  ${year}
 
 POST Submit Inproceeding Should Fail
-    [Arguments]  ${author}  ${title}  ${year}  ${booktitle}
+    [Arguments]  ${author}  ${title}  ${year}
     Go To Front Page
     Page Should Not Contain  ${author}
     Page Should Not Contain  ${title}

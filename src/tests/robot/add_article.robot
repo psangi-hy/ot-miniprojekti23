@@ -46,7 +46,7 @@ Empty Year Field
 
 *** Keywords ***
 Submit Should Succeed
-    [Arguments]  ${author}  ${title}  ${journal}  ${year}
+    [Arguments]  ${author}  ${title}  ${year}
     Go To Front Page
     Page Should Contain  ${title}
     Page Should Contain  ${author}
