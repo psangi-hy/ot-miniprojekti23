@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}BibTeX Entries{% endblock %}
+
+{% block content %}
+<br>
+<!-- Articles BibTeX -->
+<div class="bibtex-container">
+    {% for article in articles %}
+    <div class="bibtex-entry">
+        <pre>
+@article{ {{- article.key -}},
+    {%- for field in ["author", "title", "journal", "year", "volume", "pages"] %}
+{%- if article[field] %}
+    {{ field }} = { {{- article[field] -}} },
+{%- endif %}
+{%- endfor %}
+}</pre>
+    </div>
+    {% endfor %}
+
+<!-- Books BibTeX -->
+<div class="bibtex-container">
+    {% for book in books %}
+    <div class="bibtex-entry">
+        <pre>
+@book{ {{- book.key -}},
+    {%- for field in ["author", "title", "publisher", "year", "volume", "pages"] %}
+{%- if book[field] %}
+    {{ field }} = { {{- book[field] -}} },
+{%- endif %}
+{%- endfor %}
+}</pre>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Inproceedings BibTeX -->
+<div class="bibtex-container">
+    {% for inproceeding in inproceedings %}
+    <div class="bibtex-entry">
+        <pre>
+@inproceedings{ {{- inproceeding.key -}},
+    {%- for field in ["author", "title", "booktitle", "year", "pages"] %}
+    {%- if inproceeding[field] %}
+    {{ field }} = { {{- inproceeding[field] -}} },
+{%- endif %}
+{%- endfor %}
+}</pre>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

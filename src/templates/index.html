@@ -3,132 +3,27 @@
 {% block title %}References{% endblock %}
 
 {% block content %}
-	<br>
-	<h3>Articles</h3>
-	<div class="articles-table">
-		<table>
-			<thead>
-				<tr>
-					<th>Author</th>
-					<th>Title</th>
-					<th>Journal</th>
-					<th>Year</th>
-					<th>Volume</th>
-					<th>Pages</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for article in articles %}
-				<tr>
-					<td>{{ article.author}}</td>
-					<td>{{ article.title}}</td>
-					<td>{{ article.journal}}</td>
-					<td>{{ article.year}}</td>
-					<td>{{ article.volume or 'N/A' }}</td>
-					<td>{{ article.pages or 'N/A' }}</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-	<h6>BibTeX Format</h6>
-	<div class="bibtex-container">
-		{% for article in articles %}
-		<div class="bibtex-entry">
-			<pre>
-@article{ {{- article.key -}},
-{%- for field in ["author", "title", "journal", "year", "volume", "pages"] %}
-{%- if article[field] %}
-	{{ field }} = { {{- article[field] -}} },
-{%- endif %}
-{%- endfor %}
-}</pre>
-		</div>
-		{% endfor %}
-	</div>
-	<br>
-	<h3>Books</h3>
-	<div class="books-table">
-		<table>
-			<thead>
-				<tr>
-					<th>Author</th>
-					<th>Title</th>
-					<th>Publisher</th>
-					<th>Year</th>
-					<th>Volume</th>
-					<th>Pages</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for book in books %}
-				<tr>
-					<td>{{ book.author}}</td>
-					<td>{{ book.title}}</td>
-					<td>{{ book.publisher}}</td>
-					<td>{{ book.year}}</td>
-					<td>{{ book.volume or 'N/A' }}</td>
-					<td>{{ book.pages or 'N/A' }}</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-	<h6>BibTeX Format</h6>
-	<div class="bibtex-container">
-		{% for book in books %}
-		<div class="bibtex-entry">
-			<pre>
-@book{ {{- book.key -}},
-{%- for field in ["author", "title", "publisher", "year", "volume", "pages"] %}
-{%- if book[field] %}
-	{{ field }} = { {{- book[field] -}} },
-{%- endif %}
-{%- endfor %}
-}</pre>
-		</div>
-		{% endfor %}
-	</div>
-	<br>
-	<h3>Inproceedings</h3>
-	<div class="inproceedings-table">
-		<table>
-			<thead>
-				<tr>
-					<th>Author</th>
-					<th>Title</th>
-					<th>Booktitle</th>
-					<th>Year</th>
-					<th>Pages</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for inproceeding in inproceedings %}
-				<tr>
-					<td>{{ inproceeding.author}}</td>
-					<td>{{ inproceeding.title}}</td>
-					<td>{{ inproceeding.booktitle}}</td>
-					<td>{{ inproceeding.year}}</td>
-					<td>{{ inproceeding.pages or 'N/A' }}</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-	<h6>BibTeX Format</h6>
-	<div class="bibtex-container">
-		{% for inproceeding in inproceedings %}
-		<div class="bibtex-entry">
-			<pre>
-@inproceedings{ {{- inproceeding.key -}},
-{%- for field in ["author", "title", "booktitle", "year", "pages"] %}
-{%- if inproceeding[field] %}
-	{{ field }} = { {{- inproceeding[field] -}} },
-{%- endif %}
-{%- endfor %}
-}</pre>
-		</div>
-		{% endfor %}
-	</div>
+<br>
+<div class="references-table">
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+				<th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reference in references %}
+            <tr>
+                <td>{{ reference.title }}</td>
+                <td>{{ reference.author }}</td>
+                <td>{{ reference.year }}</td>
+				<td>{{ reference.type.capitalize() }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
-	

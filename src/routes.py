@@ -8,8 +8,26 @@ def index():
     articles = db_handling.select_all_articles()
     books = db_handling.select_all_books()
     inproceedings = db_handling.select_all_inproceedings()
-    return render_template(
-            "index.html", articles=articles, books=books, inproceedings=inproceedings)
+
+    all_references = []
+
+    for article in articles:
+        article_dict = article._asdict()
+        article_dict['type'] = 'article'
+        all_references.append(article_dict)
+
+    for book in books:
+        book_dict = book._asdict()
+        book_dict['type'] = 'book'
+        all_references.append(book_dict)
+
+    for inproceeding in inproceedings:
+        inproceeding_dict = inproceeding._asdict()
+        inproceeding_dict['type'] = 'inproceeding'
+        all_references.append(inproceeding_dict)
+
+    return render_template("index.html", references=all_references)
+
 
 
 @app.route("/new", methods=["GET", "POST"])
@@ -27,7 +45,6 @@ def new():
     publisher = request.form.get("publisher", default="")
     booktitle = request.form.get("booktitle", default="")
 
-    # Luo key käyttäen authorin isoja kirjaimia, julkaisu vuotta, painosta ja sivunumeroita
     key = db_handling.bibtexgen(author,year,volume,pages)
 
     if reference_type == "article" and db_handling.new_article(
@@ -43,6 +60,14 @@ def new():
         return redirect("/")
 
     return render_template("error.html", message="Something went wrong...")
+
+@app.route("/bibtex", methods=["GET"])
+def bibtex():
+    articles = db_handling.select_all_articles()
+    books = db_handling.select_all_books()
+    inproceedings = db_handling.select_all_inproceedings()
+
+    return render_template("bibtex.html", articles=articles, books=books, inproceedings=inproceedings)
 
 
 @app.route("/tests/reset", methods=["GET", "POST"])
