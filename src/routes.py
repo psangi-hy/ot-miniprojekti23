@@ -67,7 +67,10 @@ def bibtex():
     books = db_handling.select_all_books()
     inproceedings = db_handling.select_all_inproceedings()
 
-    return render_template("bibtex.html", articles=articles, books=books, inproceedings=inproceedings)
+    return render_template("bibtex.html", 
+                           articles=articles, 
+                           books=books, 
+                           inproceedings=inproceedings)
 
 
 @app.route("/tests/reset", methods=["GET", "POST"])
