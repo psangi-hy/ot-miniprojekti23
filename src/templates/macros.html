@@ -1,0 +1,29 @@
+{% macro article_bibtex(article) -%}
+@article{ {{- article.key -}},
+{%- for field in ["author", "title", "journal", "year", "volume", "pages"] %}
+{%- if article[field] %}
+    {{ field }} = { {{- article[field] -}} },
+{%- endif %}
+{%- endfor %}
+}
+{%- endmacro %}
+
+{% macro book_bibtex(book) -%}
+@book{ {{- book.key -}},
+    {%- for field in ["author", "title", "publisher", "year", "volume", "pages"] %}
+{%- if book[field] %}
+    {{ field }} = { {{- book[field] -}} },
+{%- endif %}
+{%- endfor %}
+}
+{%- endmacro %}
+
+{% macro inproceeding_bibtex(inproceeding) -%}
+@inproceedings{ {{- inproceeding.key -}},
+    {%- for field in ["author", "title", "booktitle", "year", "pages"] %}
+    {%- if inproceeding[field] %}
+    {{ field }} = { {{- inproceeding[field] -}} },
+{%- endif %}
+{%- endfor %}
+}
+{%- endmacro %}

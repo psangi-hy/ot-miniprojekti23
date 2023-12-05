@@ -20,6 +20,24 @@ def select_all_inproceedings():
     return select_all("inproceedings")
 
 
+def by_id(table, item_id):
+    sql = text(f"SELECT * FROM {table} WHERE id=:id")
+    result = db.session.execute(sql, { "id": item_id })
+    return result.one_or_none()
+
+
+def article_by_id(article_id):
+    return by_id("articles", article_id)
+
+
+def book_by_id(book_id):
+    return by_id("books", book_id)
+
+
+def inproceeding_by_id(inproceeding_id):
+    return by_id("inproceedings", inproceeding_id)
+
+
 def validate_as_numbers(numbers):
     try:
         numbers = int(numbers)
