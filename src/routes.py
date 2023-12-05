@@ -73,6 +73,25 @@ def bibtex():
                             inproceedings=inproceedings)
 
 
+@app.route("/reference/<ref_type>/<int:ref_id>")
+def reference_item(ref_type, ref_id):
+    select_func = {
+        "article": db_handling.article_by_id,
+        "book": db_handling.book_by_id,
+        "inproceedings": db_handling.inproceeding_by_id,
+    }.get(ref_type)
+
+    if not select_func:
+        return render_template("error.html", message="The page was not found."), 404
+
+    reference = select_func(ref_id)
+
+    if not reference:
+        return render_template("error.html", message="The page was not found."), 404
+
+    return render_template("reference.html", reftype=ref_type, reference=reference)
+
+
 @app.route("/tests/reset", methods=["GET", "POST"])
 def tests_reset():
     db_handling.reset_tests()

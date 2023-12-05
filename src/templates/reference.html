@@ -1,0 +1,40 @@
+{% from "macros.html" import article_bibtex, book_bibtex, inproceeding_bibtex %}
+
+{% extends "base.html" %}
+
+{% block title %}{{ reference.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ reference.title }}</h1>
+<table>
+	{% for field in [
+		("Author", "author"),
+		("Journal", "journal"),
+		("Year", "year"),
+		("Publisher", "publisher"),
+		("Volume", "volume"),
+		("Book title", "booktitle"),
+		("Pages", "pages")] %}
+	{% if reference[field[1]] %}
+	<tr>
+		<td><b>{{ field[0] }}</b></td>
+		<td>{{ reference[field[1]] }}</td>
+	</tr>
+	{% endif %}
+	{% endfor %}
+</table>
+
+<pre>
+{% if reftype == "article" %}
+{{ article_bibtex(reference) }}
+{% elif reftype == "book" %}
+{{ book_bibtex(reference) }}
+{% elif reftype == "inproceedings" %}
+{{ inproceeding_bibtex(reference) }}
+{% endif %}
+</pre>
+
+<form action="{{ reference.id }}/delete" method="post">
+	<input type="Submit" value="Delete reference" />
+</form>
+{% endblock %}
