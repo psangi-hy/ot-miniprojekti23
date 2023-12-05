@@ -128,6 +128,7 @@ def delete_reference(source_type, source_id):
         sql = text("DELETE FROM inproceedings WHERE id = :id")
     db.session.execute(sql, {"id": source_id})
     db.session.commit()
+    return True
 
 def drop_tables():
     sql_statements = [text("DROP TABLE IF EXISTS articles;"),

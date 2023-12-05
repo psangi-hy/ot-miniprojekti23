@@ -108,17 +108,20 @@ class Testdbhandling(unittest.TestCase):
     
     def test_deleting(self):
         db_handling.new_book("key1", "author1", "title1", 2022, "publisher1", "1", "10-15")
-        db_handling.delete_reference("book", 1)
+        result = db_handling.delete_reference("book", 1)
+        self.assertEqual(result, True)
         books = db_handling.select_all_books()
         self.assertEqual(len(books), 0)
 
         db_handling.new_article("key1", "author1", "title1", "journal1", 2022, "1", "10-15")
-        db_handling.delete_reference("article", 1)
+        result = db_handling.delete_reference("article", 1)
+        self.assertEqual(result, True)
         articles = db_handling.select_all_articles()
         self.assertEqual(len(articles), 0)
 
         db_handling.new_inproceeding("key1", "author1", "title1", 2022, "booktitle1", "10-15")
-        db_handling.delete_reference("inproceeding", 1)
+        result = db_handling.delete_reference("inproceeding", 1)
+        self.assertEqual(result, True)
         inproceedings = db_handling.select_all_inproceedings()
         self.assertEqual(len(inproceedings), 0)
 
