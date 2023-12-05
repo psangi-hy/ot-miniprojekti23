@@ -106,5 +106,23 @@ class Testdbhandling(unittest.TestCase):
 
         self.app_context.pop()
     
+    def test_deletion(self):
+        db_handling.new_book("key1", "author1", "title1", 2022, "publisher1", "1", "10-15")
+        book_id = db_handling.select_book("key1")[0]
+        db_handling.delete_reference("book", book_id)
+        books = db_handling.select_all_books()
+        self.assertEqual(len(books), 0)
 
+        db_handling.new_article("key1", "author1", "title1", "journal1", 2022, "1", "10-15")
+        article_id = db_handling.select_article("key1")[0]
+        db_handling.delete_reference("article", article_id)
+        articles = db_handling.select_all_articles()
+        self.assertEqual(len(articles), 0)
 
+        db_handling.new_inproceeding("key1", "author1", "title1", 2022, "booktitle1", "10-15")
+        inproceeding_id = db_handling.select_inproceeding("key1")[0]
+        db_handling.delete_reference("inproceeding", inproceeding_id)
+        inproceedings = db_handling.select_all_inproceedings()
+        self.assertEqual(len(inproceedings), 0)
+
+        self.app_context.pop()
