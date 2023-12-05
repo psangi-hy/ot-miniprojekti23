@@ -8,7 +8,7 @@ ${SERVER}  localhost:5001
 ${DELAY}  0.0 seconds
 ${HOME URL}  http://${SERVER}
 ${NEW URL}  http://${SERVER}/new
-
+${BIBTEX URL}  http://${SERVER}/bibtex
 *** Keywords ***
 Open And Configure Browser
     # jos käytät Firefoxia ja Geckodriveriä käytä seuraavaa riviä sitä alemman sijaan
@@ -23,6 +23,9 @@ Open And Configure Browser
 Front Page Should Be Open
     Title Should Be  New Reference
 
+Bibtex Page Should Be Open
+    Title Should Be  BibTeX Entries
+
 Select Article
     Go To New Page
     Click Element  id:referenceType
@@ -33,3 +36,6 @@ Go To New Page
 
 Go To Front Page
     Go To  ${HOME URL}
+
+Go To Bibtex Page
+    Go To  ${BIBTEX URL}
