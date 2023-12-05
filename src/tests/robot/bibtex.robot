@@ -2,6 +2,7 @@
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
+Test Setup  Select Article
 
 *** Test Cases ***
 Add Article And Check That Bibtex Is Correct
