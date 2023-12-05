@@ -126,7 +126,6 @@ def delete_reference(source_type, source_id):
         sql = text("DELETE FROM articles WHERE id = :id")
     elif source_type == "inproceeding":
         sql = text("DELETE FROM inproceedings WHERE id = :id")
-    
     db.session.execute(sql, {"id": source_id})
     db.session.commit()
 
