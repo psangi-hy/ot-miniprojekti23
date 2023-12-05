@@ -121,7 +121,7 @@ def new_inproceeding(key, author, title, year, booktitle, pages):
 
 def delete_reference(source_type, source_id):
     if source_type == "book":
-        sql = text("DELETE FROM books WHERE id = :source_id")
+        sql = text("DELETE FROM books WHERE id = :id")
         db.session.execute(sql, {"id": source_id})
     elif source_type == "article":
         sql = text("DELETE FROM articles WHERE id = :id")
@@ -129,6 +129,8 @@ def delete_reference(source_type, source_id):
     elif source_type == "inproceeding":
         sql = text("DELETE FROM inproceedings WHERE id = :id")
         db.session.execute(sql, {"id": source_id})
+
+    db.session.commit()
 
 
 def drop_tables():
