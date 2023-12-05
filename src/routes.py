@@ -81,6 +81,5 @@ def tests_reset():
 
 @app.route("/references/<ref_type>/<int:ref_id>/delete")
 def delete(ref_type, ref_id):
-    if request.method == "POST":
-        db_handling.delete_reference(ref_type, ref_id)
-        return redirect("/")
+    db_handling.delete_reference(ref_type, ref_id)
+    return redirect("/")
