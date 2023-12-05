@@ -17,7 +17,9 @@
         <tbody>
             {% for reference in references %}
             <tr>
-		<td><a href="/reference/{{ reference.id }}"><div>{{ reference.title }}</div></a></td>
+	        <td><a href="/reference/{{ reference.type }}/{{ reference.id }}">
+				<div>{{ reference.title }}</div>
+		</a></td>
                 <td>{{ reference.author }}</td>
                 <td>{{ reference.year }}</td>
 				<td>{{ reference.type.capitalize() }}</td>
