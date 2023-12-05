@@ -1,3 +1,5 @@
+{% from "macros.html" import article_bibtex, book_bibtex, inproceeding_bibtex %}
+
 {% extends "base.html" %}
 
 {% block title %}BibTeX Entries{% endblock %}
@@ -9,13 +11,8 @@
     {% for article in articles %}
     <div class="bibtex-entry">
         <pre>
-@article{ {{- article.key -}},
-    {%- for field in ["author", "title", "journal", "year", "volume", "pages"] %}
-{%- if article[field] %}
-    {{ field }} = { {{- article[field] -}} },
-{%- endif %}
-{%- endfor %}
-}</pre>
+{{ article_bibtex(article) }}
+</pre>
     </div>
     {% endfor %}
 
@@ -24,13 +21,8 @@
     {% for book in books %}
     <div class="bibtex-entry">
         <pre>
-@book{ {{- book.key -}},
-    {%- for field in ["author", "title", "publisher", "year", "volume", "pages"] %}
-{%- if book[field] %}
-    {{ field }} = { {{- book[field] -}} },
-{%- endif %}
-{%- endfor %}
-}</pre>
+{{ book_bibtex(book) }}
+</pre>
     </div>
     {% endfor %}
 </div>
@@ -40,13 +32,8 @@
     {% for inproceeding in inproceedings %}
     <div class="bibtex-entry">
         <pre>
-@inproceedings{ {{- inproceeding.key -}},
-    {%- for field in ["author", "title", "booktitle", "year", "pages"] %}
-    {%- if inproceeding[field] %}
-    {{ field }} = { {{- inproceeding[field] -}} },
-{%- endif %}
-{%- endfor %}
-}</pre>
+{{ inproceeding_bibtex(inproceeding) }}
+</pre>
     </div>
     {% endfor %}
 </div>
