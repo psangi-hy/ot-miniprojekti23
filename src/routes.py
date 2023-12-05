@@ -98,7 +98,7 @@ def tests_reset():
     return redirect("/")
 
 
-@app.route("/references/<ref_type>/<int:ref_id>/delete")
+@app.route("/reference/<ref_type>/<int:ref_id>/delete", methods=["POST"])
 def delete(ref_type, ref_id):
     db_handling.delete_reference(ref_type, ref_id)
     return redirect("/")
