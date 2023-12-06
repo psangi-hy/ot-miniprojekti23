@@ -20,6 +20,24 @@ def select_all_inproceedings():
     return select_all("inproceedings")
 
 
+def by_id(table, item_id):
+    sql = text(f"SELECT * FROM {table} WHERE id=:id")
+    result = db.session.execute(sql, { "id": item_id })
+    return result.one_or_none()
+
+
+def article_by_id(article_id):
+    return by_id("articles", article_id)
+
+
+def book_by_id(book_id):
+    return by_id("books", book_id)
+
+
+def inproceeding_by_id(inproceeding_id):
+    return by_id("inproceedings", inproceeding_id)
+
+
 def validate_as_numbers(numbers):
     try:
         numbers = int(numbers)
@@ -103,15 +121,14 @@ def new_inproceeding(key, author, title, year, booktitle, pages):
 
 def delete_reference(source_type, source_id):
     if source_type == "book":
-        sql = text("DELETE FROM books WHERE id = :source_id")
-        db.session.execute(sql, {"id": source_id})
+        sql = text("DELETE FROM books WHERE id = :id")
     elif source_type == "article":
         sql = text("DELETE FROM articles WHERE id = :id")
-        db.session.execute(sql, {"id": source_id})
     elif source_type == "inproceeding":
         sql = text("DELETE FROM inproceedings WHERE id = :id")
-        db.session.execute(sql, {"id": source_id})
-
+    db.session.execute(sql, {"id": source_id})
+    db.session.commit()
+    return True
 
 def drop_tables():
     sql_statements = [text("DROP TABLE IF EXISTS articles;"),
