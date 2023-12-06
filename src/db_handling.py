@@ -3,8 +3,13 @@ from app import run_sql_schema
 from db import db
 
 def select_all(table, search_query=None):
-    if search_query: 
-        sql = text(f"SELECT * FROM {table} WHERE author LIKE :query OR title LIKE :query OR year LIKE :query")
+    if search_query:
+        sql = text(
+            f"SELECT * FROM {table}"
+            "WHERE author LIKE :query "
+            "OR title LIKE :query "
+            "OR year LIKE :query"
+        )
         result = db.session.execute(sql, {"query": f"%{search_query}%"})
     else:
         sql = text(f"SELECT * FROM {table}")

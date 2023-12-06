@@ -6,7 +6,7 @@ import db_handling
 @app.route("/", methods=["GET", "POST"])
 def index():
     search_query = request.form.get("search_query")
- 
+
     articles = db_handling.select_all_articles(search_query)
     books = db_handling.select_all_books(search_query)
     inproceedings = db_handling.select_all_inproceedings(search_query)
