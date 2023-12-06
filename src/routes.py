@@ -78,7 +78,7 @@ def reference_item(ref_type, ref_id):
     select_func = {
         "article": db_handling.article_by_id,
         "book": db_handling.book_by_id,
-        "inproceedings": db_handling.inproceeding_by_id,
+        "inproceeding": db_handling.inproceeding_by_id,
     }.get(ref_type)
 
     if not select_func:
