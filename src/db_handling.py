@@ -147,12 +147,11 @@ def reset_tests():
 
 
 def bibtexgen(author,year):
-  
     initials = ''.join(word[0].upper() for word in author.split() if word[0].isalpha())[:2]
     key = f"{initials}{year}"
-    
+
     count = 0
-    while(True):
+    while True:
 
         suffix = chr(ord('A') + count)
 
@@ -168,13 +167,8 @@ def bibtexgen(author,year):
 
         if all(row[0] == 0 for row in result):
             break
-        else:
-            key = f"{initials}{year}{suffix}"
-            count += 1
+
+        key = f"{initials}{year}{suffix}"
+        count += 1
 
     return key
-    
-
-    
-
-
