@@ -13,11 +13,19 @@ class Testdbhandling(unittest.TestCase):
     def test_rightbibtexkey(self):
         self.key = db_handling.bibtexgen("Mikko Mökö", "1980")
         self.assertEqual( self.key,"MM1980")
+   
+    def test_bibtexkey_is_unique(self):
+        result = db_handling.new_article("MM2022", "Mikko Mökö", "title1", "journal1", 2022, "1", "10-15")
+        self.assertTrue(result)
+     
+        self.key = db_handling.bibtexgen("Mikko Mökö ja Reijo Kiva", 2022)
+        self.assertEqual( self.key,"MM2022A")
 
- 
-    def test_bibtexkey_no_pages(self):
-        self.key = db_handling.bibtexgen("Mikko Mökö ja Reijo Kiva", "1980")
-        self.assertEqual( self.key,"MM1980")
+        result = db_handling.new_article("MM2022A", "Mikko Mökö ja Reijo Kiva", "title1", "journal1", 2022, "1", "10-15")
+        self.assertTrue(result)
+
+        self.key = db_handling.bibtexgen("Mauri Musta", 2022)
+        self.assertEqual( self.key,"MM2022B")
 
      
     def test_validate_year_accepts_years_only(self):
