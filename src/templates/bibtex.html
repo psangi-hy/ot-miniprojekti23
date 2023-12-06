@@ -6,6 +6,9 @@
 
 {% block content %}
 <br>
+<button onclick = "copy_to_clipboard()">Copy to Clipboard</button>
+<br>
+<br>
 <!-- Articles BibTeX -->
 <div class="bibtex-container">
     {% for article in articles %}
@@ -37,4 +40,16 @@
     </div>
     {% endfor %}
 </div>
+<script>
+    function copy_to_clipboard() {
+        var bibtexEntries = document.querySelectorAll('.bibtex-entry pre');
+        var textarea = document.createElement('textarea');
+        textarea.value = Array.from(bibtexEntries).map(entry => entry.innerText).join('\n');
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        alert("Copied to Clipboard")
+    }
+</script>
 {% endblock %}
