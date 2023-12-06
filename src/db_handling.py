@@ -2,22 +2,26 @@ from sqlalchemy.sql import text
 from app import run_sql_schema
 from db import db
 
-def select_all(table):
-    sql = text(f"SELECT * FROM {table}")
-    result = db.session.execute(sql)
+def select_all(table, search_query=None):
+    if search_query: 
+        sql = text(f"SELECT * FROM {table} WHERE author LIKE :query OR title LIKE :query OR year LIKE :query")
+        result = db.session.execute(sql, {"query": f"%{search_query}%"})
+    else:
+        sql = text(f"SELECT * FROM {table}")
+        result = db.session.execute(sql)
     return result.all()
 
 
-def select_all_articles():
-    return select_all("articles")
+def select_all_articles(search_query=None):
+    return select_all("articles", search_query)
 
 
-def select_all_books():
-    return select_all("books")
+def select_all_books(search_query=None):
+    return select_all("books", search_query)
 
 
-def select_all_inproceedings():
-    return select_all("inproceedings")
+def select_all_inproceedings(search_query=None):
+    return select_all("inproceedings",search_query)
 
 
 def by_id(table, item_id):

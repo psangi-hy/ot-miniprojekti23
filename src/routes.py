@@ -5,9 +5,11 @@ import db_handling
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    articles = db_handling.select_all_articles()
-    books = db_handling.select_all_books()
-    inproceedings = db_handling.select_all_inproceedings()
+    search_query = request.form.get("search_query")
+ 
+    articles = db_handling.select_all_articles(search_query)
+    books = db_handling.select_all_books(search_query)
+    inproceedings = db_handling.select_all_inproceedings(search_query)
 
     all_references = []
 
@@ -27,7 +29,6 @@ def index():
         all_references.append(inproceeding_dict)
 
     return render_template("index.html", references=all_references)
-
 
 
 @app.route("/new", methods=["GET", "POST"])
@@ -61,11 +62,14 @@ def new():
 
     return render_template("error.html", message="Something went wrong...")
 
-@app.route("/bibtex", methods=["GET"])
+
+@app.route("/bibtex", methods=["GET", "POST"])
 def bibtex():
-    articles = db_handling.select_all_articles()
-    books = db_handling.select_all_books()
-    inproceedings = db_handling.select_all_inproceedings()
+    search_query = request.form.get("search_query")
+
+    articles = db_handling.select_all_articles(search_query)
+    books = db_handling.select_all_books(search_query)
+    inproceedings = db_handling.select_all_inproceedings(search_query)
 
     return render_template("bibtex.html",
                             articles=articles,
