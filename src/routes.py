@@ -45,7 +45,7 @@ def new():
     publisher = request.form.get("publisher", default="")
     booktitle = request.form.get("booktitle", default="")
 
-    key = db_handling.bibtexgen(author,year,volume,pages)
+    key = db_handling.bibtexgen(author,year)
 
     if reference_type == "article" and db_handling.new_article(
             key, author, title, journal, year, volume, pages):

@@ -129,12 +129,35 @@ def reset_tests():
     run_sql_schema()
 
 
-def bibtexgen(author,year,volume = None, pages = None):
-    if volume is None or volume == "":
-        volume = "0"
-    if pages is None or pages == "":
-        pages = "0"
-    initials = ''.join(word[0].upper() for word in author.split())
-    pages = ''.join(char for char in pages if char.isdigit())
-    key = f"{initials}{year}{volume}{pages}"
+def bibtexgen(author,year):
+  
+    initials = ''.join(word[0].upper() for word in author.split() if word[0].isalpha())[:2]
+    key = f"{initials}{year}"
+    
+    count = 0
+    while(True):
+
+        suffix = chr(ord('A') + count)
+
+        sql = text("""
+        SELECT COUNT(*) FROM articles WHERE key=:key
+        UNION ALL
+        SELECT COUNT(*) FROM books WHERE key=:key
+        UNION ALL
+        SELECT COUNT(*) FROM inproceedings WHERE key=:key
+        """)
+
+        result = db.session.execute(sql, {"key": key}).fetchall()
+
+        if all(row[0] == 0 for row in result):
+            break
+        else:
+            key = f"{initials}{year}{suffix}"
+            count += 1
+
     return key
+    
+
+    
+
+
