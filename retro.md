@@ -30,3 +30,34 @@
 
 * Ymmärretään asiakkaan toiveet paremmin seuraavissa asiakastapaamisissa (selkeys, muistiinpanot)
 * Testataan uudet featuret heti
+
+
+### Sprintin 3 retrospektiivi
+*Pidetty 7.12*
+
+**Start**
+
+* 
+
+**Stop**
+
+* Myöhässä / Viime hetkellä asiakastapaamiseen
+
+**Continue**
+
+* Hyvä työnjako -> omat taskit/user storyt -> saa kuitenkin auttaa muita
+* Hybridimalli
+
+**More of**
+
+* Parempaa huolta backlogista
+* Selkeä kommunikointi ryhmässä
+
+
+**Less of**
+* Testausta lopussa
+
+*Edellisviikon kehitystoimenpiteet, toimintaa yritetty parantaa*
+
+* Asiakasta on ymmärretty paremmin kuin ensimmäisessä asiakastapaamisessa. Selkeyttäviä kysymyksiä kysytty. Muistiinpanoja otettu.
+* Testausta tehty vähemmän lopuksi, mutta parannettavaa on vielä.
