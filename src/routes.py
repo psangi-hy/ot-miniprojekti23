@@ -44,10 +44,10 @@ def new():
     pages = request.form.get("pages", default="")
     publisher = request.form.get("publisher", default="")
     booktitle = request.form.get("booktitle", default="")
-
-    if not 0<=year<=2023:
-	return render_template("error.html", message="Year must be in the range of 0-2023."
     
+    if not 0 <= year <= 2023:
+        return render_template("error.html", message="Year must be in the range of 0-2023.")
+
     key = db_handling.bibtexgen(author,year)
 
 
