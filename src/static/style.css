@@ -172,3 +172,15 @@ button:hover {
 .button-container {
     padding-left: 20px;
 }
+
+.sort-button {
+    background-color: transparent;
+    color: black;
+    padding: 2px 5px;
+    border: none;
+    border-radius: 2px;
+    font-weight: normal;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: color 0.3s;
+}

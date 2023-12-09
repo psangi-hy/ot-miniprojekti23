@@ -7,24 +7,57 @@
     <table>
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Year</th>
-				<th>Type</th>
+                <th>Title <button class="sort-button" onclick="sortTable('title')">⇅</button></th>
+                <th>Author <button class="sort-button" onclick="sortTable('author')">⇅</button></th>
+                <th>Year <button class="sort-button" onclick="sortTable('year')">⇅</button></th>
+                <th>Type <button class="sort-button" onclick="sortTable('type')">⇅</button></th>                
             </tr>
         </thead>
-        <tbody>
+        <tbody id="references-body">
             {% for reference in references %}
             <tr>
-	        <td><a href="/reference/{{ reference.type }}/{{ reference.id }}">
-				<div>{{ reference.title }}</div>
-		</a></td>
+                <td><a href="/reference/{{ reference.type }}/{{ reference.id }}">
+                    <div>{{ reference.title }}</div>
+                </a></td>
                 <td>{{ reference.author }}</td>
                 <td>{{ reference.year }}</td>
-				<td>{{ reference.type.capitalize() }}</td>
+                <td>{{ reference.type.capitalize() }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+
+<script>
+    let sortState = {
+    title: 'asc',
+    author: 'asc',
+    year: 'asc',
+    type: 'asc'
+};
+
+function sortTable(sortBy) {
+    sortState[sortBy] = sortState[sortBy] === 'asc' ? 'desc' : 'asc';
+
+    fetch(`/sort?sort_by=${sortBy}&order=${sortState[sortBy]}`)
+        .then(response => response.json())
+        .then(data => {
+            let tableBody = document.getElementById('references-body');
+            tableBody.innerHTML = '';
+            data.forEach(ref => {
+                tableBody.innerHTML += `
+                    <tr>
+                        <td><a href="/reference/${ref.type}/${ref.id}"><div>${ref.title}</div></a></td>
+                        <td>${ref.author}</td>
+                        <td>${ref.year}</td>
+                        <td>${ref.type.charAt(0).toUpperCase() + ref.type.slice(1)}</td>
+                    </tr>
+                `;
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+</script>
 {% endblock %}

@@ -1,12 +1,9 @@
-from flask import render_template, redirect, request
+from flask import render_template, redirect, request, jsonify
 
 from app import app
 import db_handling
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    search_query = request.form.get("search_query")
-
+def get_all_references(search_query=None):
     articles = db_handling.select_all_articles(search_query)
     books = db_handling.select_all_books(search_query)
     inproceedings = db_handling.select_all_inproceedings(search_query)
@@ -28,8 +25,24 @@ def index():
         inproceeding_dict['type'] = 'inproceeding'
         all_references.append(inproceeding_dict)
 
+    return all_references
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    search_query = request.form.get("search_query") if request.method == "POST" else None
+    all_references = get_all_references(search_query)
     return render_template("index.html", references=all_references)
 
+@app.route("/sort", methods=["GET"])
+def sort():
+    sort_by = request.args.get("sort_by", default="type")
+    order = request.args.get("order", default="asc")
+
+    all_references = get_all_references()
+
+    sorted_references = sorted(all_references, key=lambda x: x[sort_by], reverse=order == "desc")
+
+    return jsonify(sorted_references)
 
 @app.route("/new", methods=["GET", "POST"])
 def new():
