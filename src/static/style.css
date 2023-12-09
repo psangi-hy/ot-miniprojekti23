@@ -2,6 +2,38 @@ body {
 	font-family: Arial, sans-serif;
 }
 
+body.dark-mode {
+    background-color: #333;
+    color: #f8f9fa;
+}
+
+.navbar.dark-mode {
+    background-color: #222;
+    color: #f8f9fa;
+}
+
+#dark-mode-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: .375rem .75rem;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#dark-mode-toggle:hover {
+    background-color: #555;
+}
+
+.references-table {
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 1%;
+}
+
 .references-table table {
 	width: 100%;
 	border-collapse: collapse;
@@ -13,15 +45,59 @@ body {
     text-align: left;
 }
 
+.dark-mode .references-table th, .dark-mode .references-table td {
+    border: 1px solid #555;
+    background-color: #444;
+    color: #f8f9fa;
+}
+
+.dark-mode .references-table th {
+    background-color: #333;
+}
+
+.dark-mode .reference-container form input[type="submit"] {
+    background-color: #555;
+    color: #f8f9fa;
+}
+
+.dark-mode .reference-container form input[type="submit"]:hover {
+    background-color: #666;
+}
+
+.dark-mode .reference-container pre {
+    background-color: #444;
+    color: #f8f9fa;
+}
+
+.dark-mode button {
+    background-color: #555;
+    color: #f8f9fa;
+}
+
+.dark-mode button:hover {
+    background-color: #666;
+}
+
+.dark-mode .bibtex-entry pre {
+    background-color: #333;
+    color: #f8f9fa;
+}
+
+.dark-mode .form-control {
+    background-color: #909090;
+    color: black;
+}
+
+.dark-mode .form-control-dropdown {
+    background-color: #909090;
+    color: black;
+}
+
 .references-table th {
 	background-color: #f2f2f2;
 }
 
 .references-table td {
-	padding: 0;
-}
-
-.references-table div {
 	padding: 10px;
 }
 
@@ -37,4 +113,62 @@ body {
 .form-group {
     display: grid;
     place-items: center;
+}
+
+.reference-container {
+    text-align: center;
+    width: 100%;
+}
+
+.reference-container table, .reference-container pre, .reference-container form {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.reference-container pre {
+    background-color: #f2f2f2;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: left;
+    margin: 20px auto;
+    width: auto;
+    text-align: left;
+}
+
+.reference-container form input[type="submit"] {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.reference-container form input[type="submit"]:hover {
+    background-color: #e60000;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.button-container {
+    padding-left: 20px;
 }

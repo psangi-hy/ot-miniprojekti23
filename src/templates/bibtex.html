@@ -6,8 +6,9 @@
 
 {% block content %}
 <br>
-<button onclick = "copy_to_clipboard()">Copy to Clipboard</button>
-<br>
+<div class="button-container">
+<button onclick = "copy_to_clipboard()">Click to copy all BibTeX to clipboard</button>
+</div>
 <br>
 <!-- Articles BibTeX -->
 <div class="bibtex-container">
@@ -49,7 +50,7 @@
         textarea.select();
         document.execCommand('copy');
         document.body.removeChild(textarea);
-        alert("Copied to Clipboard")
+        alert("Copied to clipboard")
     }
 </script>
 {% endblock %}
