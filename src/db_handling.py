@@ -64,17 +64,10 @@ def validate_pages(pages):
     pages = pages.replace("-", "").replace(" ", "")
     return validate_as_numbers(pages)
 
-
-def validate_volume(volume):
-    if len(volume) == 0:
-        return True
-    return validate_as_numbers(volume)
-
-
 def new_article(key, author, title, journal, year, volume, pages):
     if len(key) == 0 or len(author) == 0 or len(title) == 0  or len(journal) == 0 or year is None:
         return False
-    if not validate_year(year) or not validate_pages(pages) or not validate_volume(volume):
+    if not validate_year(year) or not validate_pages(pages):
         return False
     sql = text(
             "INSERT INTO articles (key, author, title, journal, year, volume, pages)"
@@ -93,7 +86,7 @@ def new_article(key, author, title, journal, year, volume, pages):
 def new_book(key, author, title, year, publisher, volume, pages):
     if len(key)== 0 or len(author) == 0 or len(title) == 0 or len(publisher) == 0 or year is None:
         return False
-    if not validate_year(year) or not validate_pages(pages) or not validate_volume(volume):
+    if not validate_year(year) or not validate_pages(pages):
         return False
     sql = text(
             "INSERT INTO books (key, author, title, year, publisher, volume, pages)"
