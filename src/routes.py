@@ -3,35 +3,40 @@ from flask import render_template, redirect, request, jsonify
 from app import app
 import db_handling
 
+
 def get_all_references(search_query=None):
     articles = db_handling.select_all_articles(search_query)
     books = db_handling.select_all_books(search_query)
     inproceedings = db_handling.select_all_inproceedings(search_query)
 
     all_references = []
-
-    for article in articles:
-        article_dict = article._asdict()
-        article_dict['type'] = 'article'
-        all_references.append(article_dict)
-
-    for book in books:
-        book_dict = book._asdict()
-        book_dict['type'] = 'book'
-        all_references.append(book_dict)
-
-    for inproceeding in inproceedings:
-        inproceeding_dict = inproceeding._asdict()
-        inproceeding_dict['type'] = 'inproceeding'
-        all_references.append(inproceeding_dict)
-
+    
+    all_references.extend(
+        __get_converted_db_data_list('article', articles))
+    all_references.extend(
+        __get_converted_db_data_list('book', books))
+    all_references.extend(
+        __get_converted_db_data_list('inproceeding', inproceedings))
+    
     return all_references
+
+
+def __get_converted_db_data_list(type_name: str, refrences):
+    ref_list = []
+    for refrence in refrences:
+        refrence_dict = refrence._asdict()
+        refrence_dict['type'] = type_name
+        ref_list.append(refrence_dict)
+    return ref_list
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    search_query = request.form.get("search_query") if request.method == "POST" else None
+    search_query = request.form.get(
+        "search_query") if request.method == "POST" else None
     all_references = get_all_references(search_query)
     return render_template("index.html", references=all_references)
+
 
 @app.route("/sort", methods=["GET"])
 def sort():
@@ -40,9 +45,11 @@ def sort():
 
     all_references = get_all_references()
 
-    sorted_references = sorted(all_references, key=lambda x: x[sort_by], reverse=order == "desc")
+    sorted_references = sorted(
+        all_references, key=lambda x: x[sort_by], reverse=order == "desc")
 
     return jsonify(sorted_references)
+
 
 @app.route("/new", methods=["GET", "POST"])
 def new():
@@ -59,7 +66,7 @@ def new():
     publisher = request.form.get("publisher", default="")
     booktitle = request.form.get("booktitle", default="")
 
-    key = db_handling.bibtexgen(author,year)
+    key = db_handling.bibtexgen(author, year)
 
     if reference_type == "article" and db_handling.new_article(
             key, author, title, journal, year, volume, pages):
@@ -85,9 +92,9 @@ def bibtex():
     inproceedings = db_handling.select_all_inproceedings(search_query)
 
     return render_template("bibtex.html",
-                            articles=articles,
-                            books=books,
-                            inproceedings=inproceedings)
+                           articles=articles,
+                           books=books,
+                           inproceedings=inproceedings)
 
 
 @app.route("/reference/<ref_type>/<int:ref_id>")
