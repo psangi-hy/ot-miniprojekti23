@@ -10,24 +10,24 @@ def get_all_references(search_query=None):
     inproceedings = db_handling.select_all_inproceedings(search_query)
 
     all_references = []
-    
+
     all_references.extend(
         __get_converted_db_data_list('article', articles))
     all_references.extend(
         __get_converted_db_data_list('book', books))
     all_references.extend(
         __get_converted_db_data_list('inproceeding', inproceedings))
-    
+
     return all_references
 
 
-def __get_converted_db_data_list(type_name: str, refrences):
-    ref_list = []
-    for refrence in refrences:
-        refrence_dict = refrence._asdict()
-        refrence_dict['type'] = type_name
-        ref_list.append(refrence_dict)
-    return ref_list
+def __get_converted_db_data_list(type_name: str, references):
+    reference_list = []
+    for reference in references:
+        reference_dict = reference._asdict()
+        reference_dict['type'] = type_name
+        reference_list.append(reference_dict)
+    return reference_list
 
 
 @app.route("/", methods=["GET", "POST"])
