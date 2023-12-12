@@ -1,3 +1,5 @@
+import json
+import requests
 from sqlalchemy.sql import text
 from app import run_sql_schema
 from db import db
@@ -199,3 +201,79 @@ def bibtexgen(author,year):
         count += 1
 
     return key
+
+def article_data(dict1, source, keys):
+    dict1["type"] = "article"
+    try:
+        dict1["journal"] = source["container-title"]
+    except KeyError:
+        dict1["journal"] = ""
+
+    if "volume" in keys:
+        dict1["volume"] = source["volume"]
+    if "page" in keys:
+        dict1["pages"] = source["page"]
+
+def proceedings_data(dict1, source):
+    dict1["type"] = "inproceeding"
+    try:
+        dict1["booktitle"] = source["container-title"]
+    except KeyError:
+        dict1["booktitle"] = ""
+
+def book_data(dict1, source, keys):
+    dict1["type"] = "book"
+    try:
+        dict1["publisher"] = source["publisher"]
+    except KeyError:
+        dict1["publisher"] = ""
+
+    if "volume" in keys:
+        dict1["volume"] = source["volume"]
+    if "page" in keys:
+        dict1["pages"] = source["page"]
+
+def source_data(dict1, source, keys):
+    try:
+        author = f"{source['author'][0]['family']}, {source['author'][0]['given']}"
+        if len(source["author"])>1:
+            author += f" and {source['author'][1]['family']}, {source['author'][1]['given']}"
+        dict1["author"] = author
+    except KeyError:
+        dict1["author"] = ""
+
+    try:
+        dict1["title"] = f"{source['title']}"
+        if "subtitle" in keys and source["subtitle"]:
+            dict1["title"] += f": {source['subtitle'][0]}"
+    except KeyError:
+        dict1["title"] = ""
+
+    try:
+        dict1["year"] = source["published"]["date-parts"][0][0]
+    except KeyError:
+        dict1["year"] = ""
+
+def fetch_by_doi(doi):
+    url = "https://dx.doi.org/" + str(doi)
+    header = {'accept': 'application/citeproc+json'}
+    result = requests.get(url, headers=header, timeout=6)
+
+    data = None
+    if result.status_code == 200:
+        data = json.loads(result.text)
+    keys = data.keys()
+    formatted = {}
+
+    source_data(formatted, data, keys)
+
+    if data["type"] == "journal-article":
+        article_data(formatted, data, keys)
+
+    elif data["type"] == "proceedings-article":
+        proceedings_data(formatted, data)
+
+    elif data["type"] == "book-chapter":
+        book_data(formatted, data, keys)
+
+    return formatted
