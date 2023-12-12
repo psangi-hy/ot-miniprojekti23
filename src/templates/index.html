@@ -10,7 +10,8 @@
                 <th>Title <button class="sort-button" onclick="sortTable('title')">⇅</button></th>
                 <th>Author <button class="sort-button" onclick="sortTable('author')">⇅</button></th>
                 <th>Year <button class="sort-button" onclick="sortTable('year')">⇅</button></th>
-                <th>Type <button class="sort-button" onclick="sortTable('type')">⇅</button></th>                
+                <th>Type <button class="sort-button" onclick="sortTable('type')">⇅</button></th>
+                <th>Tag <button class="sort-button" onclick="sortTable('tag')">⇅</button></th>                
             </tr>
         </thead>
         <tbody id="references-body">
@@ -22,6 +23,7 @@
                 <td>{{ reference.author }}</td>
                 <td>{{ reference.year }}</td>
                 <td>{{ reference.type.capitalize() }}</td>
+                <td>{{ reference.tag }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -33,7 +35,8 @@
     title: 'asc',
     author: 'asc',
     year: 'asc',
-    type: 'asc'
+    type: 'asc',
+    tag: 'asc'
 };
 
 function sortTable(sortBy) {
@@ -51,6 +54,7 @@ function sortTable(sortBy) {
                         <td>${ref.author}</td>
                         <td>${ref.year}</td>
                         <td>${ref.type.charAt(0).toUpperCase() + ref.type.slice(1)}</td>
+                        <td>${ref.tag}</td>
                     </tr>
                 `;
             });

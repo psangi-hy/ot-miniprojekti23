@@ -65,19 +65,21 @@ def new():
     pages = request.form.get("pages", default="")
     publisher = request.form.get("publisher", default="")
     booktitle = request.form.get("booktitle", default="")
+    tag = request.form.get("tag", default="")
+
 
     key = db_handling.bibtexgen(author, year)
 
     if reference_type == "article" and db_handling.new_article(
-            key, author, title, journal, year, volume, pages):
+            key, author, title, journal, year, volume, pages,tag):
         return redirect("/")
 
     if reference_type == "book" and db_handling.new_book(
-            key, author, title, year, publisher, volume, pages):
+            key, author, title, year, publisher, volume, pages,tag):
         return redirect("/")
 
     if reference_type == "inproceeding" and db_handling.new_inproceeding(
-            key, author, title, year, booktitle, pages):
+            key, author, title, year, booktitle, pages,tag):
         return redirect("/")
 
     return render_template("error.html", message="Something went wrong...")

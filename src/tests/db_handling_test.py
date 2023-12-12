@@ -15,13 +15,13 @@ class Testdbhandling(unittest.TestCase):
         self.assertEqual( self.key,"MM1980")
    
     def test_bibtexkey_is_unique(self):
-        result = db_handling.new_article("MM2022", "Mikko Mökö", "title1", "journal1", 2022, "1", "10-15")
+        result = db_handling.new_article("MM2022", "Mikko Mökö", "title1", "journal1", 2022, "1", "10-15", "tag")
         self.assertTrue(result)
      
         self.key = db_handling.bibtexgen("Mikko Mökö ja Reijo Kiva", 2022)
         self.assertEqual( self.key,"MM2022A")
 
-        result = db_handling.new_article("MM2022A", "Mikko Mökö ja Reijo Kiva", "title1", "journal1", 2022, "1", "10-15")
+        result = db_handling.new_article("MM2022A", "Mikko Mökö ja Reijo Kiva", "title1", "journal1", 2022, "1", "10-15", "tag")
         self.assertTrue(result)
 
         self.key = db_handling.bibtexgen("Mauri Musta", 2022)
@@ -43,7 +43,7 @@ class Testdbhandling(unittest.TestCase):
         self.assertEqual(db_handling.validate_pages("1001"), True)
      
     def test_new_article(self):
-        result = db_handling.new_article("key1", "author1", "title1", "journal1", 2022, "1", "10-15")
+        result = db_handling.new_article("key1", "author1", "title1", "journal1", 2022, "1", "10-15", "tag")
         self.assertTrue(result)
 
         articles = db_handling.select_all_articles()
@@ -57,11 +57,12 @@ class Testdbhandling(unittest.TestCase):
         self.assertEqual(article.year, 2022)
         self.assertEqual(article.volume, "1")
         self.assertEqual(article.pages, "10-15")
+        self.assertEqual(article.tag, "tag")
 
         self.app_context.pop()
     
     def test_new_book(self):
-        result = db_handling.new_book("key1", "author1", "title1", 2022, "publisher1", "1", "10-15")
+        result = db_handling.new_book("key1", "author1", "title1", 2022, "publisher1", "1", "10-15", "tag")
         self.assertTrue(result)
 
         books = db_handling.select_all_books()
@@ -75,11 +76,12 @@ class Testdbhandling(unittest.TestCase):
         self.assertEqual(book.publisher, "publisher1")
         self.assertEqual(book.volume, "1")
         self.assertEqual(book.pages, "10-15")
+        self.assertEqual(book.tag, "tag")
 
         self.app_context.pop()
     
     def test_new_inproceeding(self):
-        result = db_handling.new_inproceeding("key1", "author1", "title1", 2022, "booktitle1", "10-15")
+        result = db_handling.new_inproceeding("key1", "author1", "title1", 2022, "booktitle1", "10-15", "tag")
         self.assertTrue(result)
 
         inproceedings = db_handling.select_all_inproceedings()
@@ -92,23 +94,24 @@ class Testdbhandling(unittest.TestCase):
         self.assertEqual(inproceeding.year, 2022)
         self.assertEqual(inproceeding.booktitle, "booktitle1")
         self.assertEqual(inproceeding.pages, "10-15")
+        self.assertEqual(inproceeding.tag, "tag")
 
         self.app_context.pop()
     
     def test_deleting(self):
-        db_handling.new_book("key1", "author1", "title1", 2022, "publisher1", "1", "10-15")
+        db_handling.new_book("key1", "author1", "title1", 2022, "publisher1", "1", "10-15", "tag")
         result = db_handling.delete_reference("book", 1)
         self.assertEqual(result, True)
         books = db_handling.select_all_books()
         self.assertEqual(len(books), 0)
 
-        db_handling.new_article("key1", "author1", "title1", "journal1", 2022, "1", "10-15")
+        db_handling.new_article("key1", "author1", "title1", "journal1", 2022, "1", "10-15", "tag")
         result = db_handling.delete_reference("article", 1)
         self.assertEqual(result, True)
         articles = db_handling.select_all_articles()
         self.assertEqual(len(articles), 0)
 
-        db_handling.new_inproceeding("key1", "author1", "title1", 2022, "booktitle1", "10-15")
+        db_handling.new_inproceeding("key1", "author1", "title1", 2022, "booktitle1", "10-15", "tag")
         result = db_handling.delete_reference("inproceeding", 1)
         self.assertEqual(result, True)
         inproceedings = db_handling.select_all_inproceedings()

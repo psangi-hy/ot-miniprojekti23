@@ -7,7 +7,8 @@ def select_all(table, search_query=None):
         sql = text(f"SELECT * FROM {table} "
             "WHERE author LIKE :query OR "
             "title LIKE :query OR "
-            "year LIKE :query")
+            "year LIKE :query OR "
+            "tag LIKE :query")
 
         result = db.session.execute(sql, {"query": f"%{search_query}%"})
     else:
@@ -64,58 +65,61 @@ def validate_pages(pages):
     pages = pages.replace("-", "").replace(" ", "")
     return validate_as_numbers(pages)
 
-def new_article(key, author, title, journal, year, volume, pages):
+def new_article(key, author, title, journal, year, volume, pages, tag):
     if len(key) == 0 or len(author) == 0 or len(title) == 0  or len(journal) == 0 or year is None:
         return False
     if not validate_year(year) or not validate_pages(pages):
         return False
     sql = text(
-            "INSERT INTO articles (key, author, title, journal, year, volume, pages)"
-            "VALUES (:key, :author, :title, :journal, :year, :volume, :pages)")
+            "INSERT INTO articles (key, author, title, journal, year, volume, pages, tag)"
+            "VALUES (:key, :author, :title, :journal, :year, :volume, :pages, :tag)")
     db.session.execute(sql, {"key": key,
                              "author": author,
                              "title": title,
                              "journal": journal,
                              "year": year,
                              "volume": volume,
-                             "pages": pages})
+                             "pages": pages,
+                             "tag":tag})
     db.session.commit()
     return True
 
 
-def new_book(key, author, title, year, publisher, volume, pages):
+def new_book(key, author, title, year, publisher, volume, pages, tag):
     if len(key)== 0 or len(author) == 0 or len(title) == 0 or len(publisher) == 0 or year is None:
         return False
     if not validate_year(year) or not validate_pages(pages):
         return False
     sql = text(
-            "INSERT INTO books (key, author, title, year, publisher, volume, pages)"
-            "VALUES (:key, :author, :title, :year, :publisher, :volume, :pages)")
+            "INSERT INTO books (key, author, title, year, publisher, volume, pages,tag)"
+            "VALUES (:key, :author, :title, :year, :publisher, :volume, :pages, :tag)")
     db.session.execute(sql, {"key": key,
                              "author": author,
                              "title": title,
                              "year": year,
                              "publisher": publisher,
                              "volume": volume,
-                             "pages": pages})
+                             "pages": pages,
+                             "tag": tag})
     db.session.commit()
     return True
 
 
-def new_inproceeding(key, author, title, year, booktitle, pages):
+def new_inproceeding(key, author, title, year, booktitle, pages, tag):
     if len(author) == 0 or len(title) == 0 or len(booktitle) == 0 or year is None:
         return False
     if not validate_year(year) or not validate_pages(pages):
         return False
     sql = text(
-            "INSERT INTO inproceedings (key, author, title, year, booktitle, pages)"
-            "VALUES (:key, :author, :title, :year, :booktitle, :pages)")
+            "INSERT INTO inproceedings (key, author, title, year, booktitle, pages, tag)"
+            "VALUES (:key, :author, :title, :year, :booktitle, :pages, :tag)")
     db.session.execute(sql, {"key": key,
                              "author": author,
                              "title": title,
                              "year": year,
                              "booktitle": booktitle,
-                             "pages": pages})
+                             "pages": pages,
+                             "tag": tag})
     db.session.commit()
     return True
 

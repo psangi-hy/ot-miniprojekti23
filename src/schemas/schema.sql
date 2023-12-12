@@ -6,7 +6,8 @@ CREATE TABLE articles(
     journal VARCHAR (200),
     year INTEGER,
     volume VARCHAR (100),
-    pages VARCHAR (50)
+    pages VARCHAR (50),
+    tag VARCHAR (50)
 );
 
 CREATE TABLE books(
@@ -17,7 +18,9 @@ CREATE TABLE books(
     year INTEGER,
     publisher VARCHAR (100),
     volume VARCHAR (100),
-    pages VARCHAR (50)
+    pages VARCHAR (50),
+    tag VARCHAR (50)
+
 );
 
 CREATE TABLE inproceedings(
@@ -27,5 +30,6 @@ CREATE TABLE inproceedings(
     title VARCHAR (200),
     year INTEGER,
     booktitle VARCHAR (100),
-    pages VARCHAR (50)
+    pages VARCHAR (50),
+    tag VARCHAR (50)
 );
