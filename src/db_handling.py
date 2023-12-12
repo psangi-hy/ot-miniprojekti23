@@ -4,6 +4,31 @@ from sqlalchemy.sql import text
 from app import run_sql_schema
 from db import db
 
+def get_all_references(search_query=None, search_option = None):
+    articles = select_all_articles(search_query, search_option)
+    books = select_all_books(search_query, search_option)
+    inproceedings = select_all_inproceedings(search_query, search_option)
+
+    all_references = []
+
+    all_references.extend(
+        __get_converted_db_data_list('article', articles))
+    all_references.extend(
+        __get_converted_db_data_list('book', books))
+    all_references.extend(
+        __get_converted_db_data_list('inproceeding', inproceedings))
+
+    return all_references
+
+def __get_converted_db_data_list(type_name: str, references):
+    reference_list = []
+    for reference in references:
+        reference_dict = reference._asdict()
+        reference_dict['type'] = type_name
+        reference_list.append(reference_dict)
+    return reference_list
+
+
 def select_all(table, search_query=None, search_option= None):
     if search_query and search_option == "OR":
         search_terms = search_query.split()
@@ -262,8 +287,15 @@ def fetch_by_doi(doi):
     result = requests.get(url, headers=header, timeout=6)
 
     data = None
+    try:
+        data = result.json()
+    except json.JSONDecodeError:
+        return {'error': 'Invalid JSON response'}
+
     if result.status_code == 200:
         data = json.loads(result.text)
+    if result.status_code != 200:
+        return {'error': f'HTTP Error: {result.status_code}'}
     keys = data.keys()
     formatted = {}
 

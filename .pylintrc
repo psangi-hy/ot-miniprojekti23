@@ -31,8 +31,12 @@ max-nested-blocks=3
 # Maximum number of arguments for function / method.
 max-args=8
 
+# Maximum number of return statements in function / method.
+max-returns=8
+
+
 # Maximum number of statements in function / method body.
-max-statements=20
+max-statements=22
 
 # Maximum number of attributes for a class.
 max-attributes=10

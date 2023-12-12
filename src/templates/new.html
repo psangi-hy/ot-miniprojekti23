@@ -6,10 +6,9 @@
 <div class="container mt-4">
     <h3 class="text-center">New Reference</h3>
     <br>
-
     <form method="post" action="">
-	    <input type="text" placeholder="Get from DOI" name="doi" id="doi">
-	    <input type="submit" value="Submit">
+	    <input type="text" placeholder="Get from DOI" class="doi" name="doi" id="doi">
+	    <input type="submit" class="doi" value="Submit">
     </form>
 
     <!-- Dropdown for Reference Type Selection -->
@@ -31,7 +30,7 @@
 	    (  "title",     "Title:",     "text",   True),
 	    (  "journal",   "Journal:",   "text",   True),
 	    (  "year",      "Year:",      "number", True),
-	    (  "volume",    "Volume:",    "number", False),
+	    (  "volume",    "Volume:",    "text", False),
 	    (  "pages",     "Pages:",     "text",   False),
 	    (  "tag",       "Tag:",       "text",   False))),
 	("book", (
@@ -39,7 +38,7 @@
 	    (  "title",     "Title:",     "text",   True),
 	    (  "publisher", "Publisher:", "text",   True),
 	    (  "year",      "Year:",      "number", True),
-	    (  "volume",    "Volume:",    "number", False),
+	    (  "volume",    "Volume:",    "text", False),
 	    (  "pages",     "Pages:",     "text",   False),
 	    (  "tag",       "Tag:",       "text",   False))),
 	("inproceeding", (
@@ -66,7 +65,9 @@
 		>
 	    </div>
 	    {% endfor %}
+		<div class="d-flex justify-content-center">
 	    <button type="submit" class="btn btn-primary">Save</button>
+		</div>
 	</form>
     </div>
     {% endfor %}

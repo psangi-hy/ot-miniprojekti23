@@ -88,6 +88,11 @@ body.dark-mode {
     color: black;
 }
 
+.dark-mode .doi {
+    background-color: #b8b3b3;
+    color: black;
+}
+
 .dark-mode .form-control-dropdown {
     background-color: #909090;
     color: black;
