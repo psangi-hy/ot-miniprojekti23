@@ -15,118 +15,49 @@
             <option value="inproceeding">Inproceeding</option>
         </select>
     </div>
-    <!-- Article Form -->
-    <div id="articleFields" style="display: none;">
-        <form method="post" class="needs-validation">
-            <input type="hidden" name="type" value="article">
-            <!-- Article Form Fields -->
-            <div class="form-group">
-                <label for="author">Author:</label>
-                <input type="text" class="form-control" name="author" id="author" required>
-            </div>
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" class="form-control" name="title" id="title" required>
-            </div>
-            <div class="form-group">
-                <label for="journal">Journal:</label>
-                <input type="text" class="form-control" name="journal" id="journal" required>
-            </div>
-            <div class="form-group">
-                <label for="year">Year:</label>
-                <input type="number" class="form-control" name="year" id="year" required>
-            </div>
-            <div class="form-group">
-                <label for="volume">Volume:</label>
-                <input type="text" class="form-control" name="volume" id="volume">
-            </div>
-            <div class="form-group">
-                <label for="pages">Pages:</label>
-                <input type="text" class="form-control" name="pages" pattern="\d+([- ]+\d+)?" id="pages">
-            </div>
-            <div class="form-group">
-                <label for="tag">Tag:</label>
-                <input type="text" class="form-control" name="tag" id="tag">
-            </div>
-            <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-        </form>
-    </div>
 
-    <!-- Book Form -->
-    <div id="bookFields" style="display: none;">
-        <form method="post" class="needs-validation">
-            <input type="hidden" name="type" value="book">
-            <!-- Book Form Fields -->
-            <div class="form-group">
-                <label for="author">Author:</label>
-                <input type="text" class="form-control" name="author" id="author" required>
-            </div>
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" class="form-control" name="title" id="title" required>
-            </div>
-            <div class="form-group">
-                <label for="publisher">Publisher:</label>
-                <input type="text" class="form-control" name="publisher" id="publisher" required>
-            </div>
-            <div class="form-group">
-                <label for="year">Year:</label>
-                <input type="number" class="form-control" name="year" id="year" required>
-            </div>
-            <div class="form-group">
-                <label for="volume">Volume:</label>
-                <input type="text" class="form-control" name="volume" id="volume">
-            </div>
-            <div class="form-group">
-                <label for="pages">Pages:</label>
-                <input type="text" class="form-control" name="pages" pattern="\d+([- ]+\d+)?" id="pages">
-            </div>
-            <div class="form-group">
-                <label for="tag">Tag:</label>
-                <input type="text" class="form-control" name="tag" id="tag">
-            </div>
-            <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-        </form>
+    {% for reftype, fields in [
+	("article", (
+	    (  "author",    "Author:",    "text",   True),
+	    (  "title",     "Title:",     "text",   True),
+	    (  "journal",   "Journal:",   "text",   True),
+	    (  "year",      "Year:",      "number", False),
+	    (  "volume",    "Volume:",    "number", False),
+	    (  "pages",     "Pages:",     "text",   False),
+	    (  "tag",       "Tag:",       "text",   False))),
+	("book", (
+	    (  "author",    "Author:",    "text",   True),
+	    (  "title",     "Title:",     "text",   True),
+	    (  "publisher", "Publisher:", "text",   True),
+	    (  "year",      "Year:",      "number", False),
+	    (  "volume",    "Volume:",    "number", False),
+	    (  "pages",     "Pages:",     "text",   False),
+	    (  "tag",       "Tag:",       "text",   False))),
+	("inproceeding", (
+	    (  "author",    "Author:",    "text",   True),
+	    (  "title",     "Title:",     "text",   True),
+	    (  "booktitle", "Book title:","text",   True),
+	    (  "year",      "Year:",      "number", False),
+	    (  "pages",     "Pages:",     "text",   False),
+	    (  "tag",       "Tag:",       "text",   False))),
+    ] %}
+    <!-- {{ reftype.capitalize() }} Form -->
+    <div id="{{ reftype + "Fields" }}" style="display: none;">
+	<form method="post" class="needs-validation">
+	    <!-- {{ reftype.capitalize() }} Form Fields -->
+	    <input type="hidden" name="type" value="{{ reftype }}">
+	    {% for name, label, type, required in fields %}
+	    <div class="form-group">
+		<label for="{{ name }}">{{ label }}</label>
+		<input type="{{ type }}" class="form-control" name="{{ name }}" id="{{ name }}"
+		{%- if required %} required{% endif -%}
+		{%- if name == "pages" %} pattern="\d+([- ]+\d+)?"{% endif -%}
+		>
+	    </div>
+	    {% endfor %}
+	</form>
     </div>
-
-    <!-- Inproceeding Form -->
-    <div id="inproceedingFields" style="display: none;">
-        <form method="post" class="needs-validation">
-            <input type="hidden" name="type" value="inproceeding">
-            <!-- Inproceeding Form Fields -->
-            <div class="form-group">
-                <label for="author">Author:</label>
-                <input type="text" class="form-control" name="author" id="author" required>
-            </div>
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" class="form-control" name="title" id="title" required>
-            </div>
-            <div class="form-group">
-                <label for="booktitle">Booktitle:</label>
-                <input type="text" class="form-control" name="booktitle" id="booktitle" required>
-            </div>
-            <div class="form-group">
-                <label for="year">Year:</label>
-                <input type="number" class="form-control" name="year" id="year" required>
-            </div>
-            <div class="form-group">
-                <label for="pages">Pages:</label>
-                <input type="text" class="form-control" name="pages" pattern="\d+([- ]+\d+)?" id="pages">
-            </div>
-            <div class="form-group">
-                <label for="tag">Tag:</label>
-                <input type="text" class="form-control" name="tag" id="tag">
-            </div>
-            <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-        </form>
-    </div>
+    {% endfor %}
 </div>
 
 
