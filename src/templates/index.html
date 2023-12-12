@@ -3,6 +3,17 @@
 {% block title %}References{% endblock %}
 
 {% block content %}
+{%- if search_query -%}
+<h1>
+	{%- if search_option == "OR" -%}
+	References that match any of
+	{%- elif search_option == "AND" -%}
+	References that match all of
+	{%- endif -%}
+	{{- " \"" + "\", \"".join(search_query.split()) + "\"." -}}
+</h1>
+{%- endif -%}
+
 <div class="references-table">
     <table>
         <thead>

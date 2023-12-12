@@ -56,7 +56,9 @@ def index():
         inproceeding_dict['type'] = 'inproceeding'
         all_references.append(inproceeding_dict)
 
-    return render_template("index.html", references=all_references)
+    return render_template("index.html", references=all_references,
+                                         search_query=search_query,
+                                         search_option=search_option)
 
 
 @app.route("/sort", methods=["GET"])
