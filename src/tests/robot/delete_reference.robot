@@ -32,6 +32,7 @@ Reference Should Exist On The Front Page
 Delete Reference
 	Go To Reference Page  ${REFTITLE}
 	Click Button  Delete reference
+	Handle Alert
 
 Reference Should Not Exist On The Front Page
 	Go To Front Page
