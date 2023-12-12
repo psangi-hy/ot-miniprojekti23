@@ -10,9 +10,10 @@ def select_all(table, search_query=None, search_option= None):
         conditions = (
             " OR ".join(
                 [
-                    f"{table}.author LIKE :term{i} OR "
-                    f"{table}.title LIKE :term{i} OR "
-                    f"{table}.year LIKE :term{i}"
+                    f"({table}.author LIKE :term{i}) OR "
+                    f"({table}.title LIKE :term{i}) OR "
+                    f"({table}.year LIKE :term{i}) OR "
+                    f"({table}.tag LIKE :term{i})"
                     for i in range(len(search_terms))
                 ]
             )
@@ -25,9 +26,10 @@ def select_all(table, search_query=None, search_option= None):
         conditions = (
             " AND ".join(
                 [
-                    f"({table}.author LIKE :term{i} OR "
-                    f"{table}.title LIKE :term{i} OR "
-                    f"{table}.year LIKE :term{i})"
+                    f"({table}.author LIKE :term{i}) OR "
+                    f"({table}.title LIKE :term{i}) OR "
+                    f"({table}.year LIKE :term{i}) OR "
+                    f"({table}.tag LIKE :term{i})"
                     for i in range(len(search_terms))
                 ]
             )
