@@ -32,9 +32,30 @@ def __get_converted_db_data_list(type_name: str, references):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    search_query = request.form.get(
-        "search_query") if request.method == "POST" else None
-    all_references = get_all_references(search_query)
+    search_query = request.form.get("search_query")
+    search_option = request.form.get("search_option", None)
+
+    articles = db_handling.select_all_articles(search_query, search_option)
+    books = db_handling.select_all_books(search_query, search_option)
+    inproceedings = db_handling.select_all_inproceedings(search_query, search_option)
+
+    all_references = []
+
+    for article in articles:
+        article_dict = article._asdict()
+        article_dict['type'] = 'article'
+        all_references.append(article_dict)
+
+    for book in books:
+        book_dict = book._asdict()
+        book_dict['type'] = 'book'
+        all_references.append(book_dict)
+
+    for inproceeding in inproceedings:
+        inproceeding_dict = inproceeding._asdict()
+        inproceeding_dict['type'] = 'inproceeding'
+        all_references.append(inproceeding_dict)
+
     return render_template("index.html", references=all_references)
 
 

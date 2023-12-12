@@ -25,7 +25,18 @@
                     {% if not (request.path.startswith("/new") or request.path.startswith("/reference/article/") or request.path.startswith("/reference/book/")or request.path.startswith("/reference/inproceeding/") ) %}
                         <form class="form-inline my-2 my-lg-0" method="POST" action="{{ url_for(request.endpoint) }}">
                             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search_query">
-                            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                            
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="search_option" id="orRadio" value="OR" {% if session.search_option == 'OR' or not session.search_option %}checked{% endif %}>
+                                <label class="form-check-label" for="orRadio">OR</label>
+                            </div>
+                            
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="search_option" id="andRadio" value="AND" {% if session.search_option == 'AND' %}checked{% endif %}>
+                                <label class="form-check-label" for="andRadio">AND</label>
+                            </div>
+                            
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     {% endif %}
                 </li>

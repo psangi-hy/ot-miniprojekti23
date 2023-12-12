@@ -2,31 +2,53 @@ from sqlalchemy.sql import text
 from app import run_sql_schema
 from db import db
 
-def select_all(table, search_query=None):
-    if search_query:
-        sql = text(f"SELECT * FROM {table} "
-            "WHERE author LIKE :query OR "
-            "title LIKE :query OR "
-            "year LIKE :query OR "
-            "tag LIKE :query")
-
-        result = db.session.execute(sql, {"query": f"%{search_query}%"})
+def select_all(table, search_query=None, search_option= None):
+    if search_query and search_option == "OR":
+        search_terms = search_query.split()
+        conditions = (
+            " OR ".join(
+                [
+                    f"{table}.author LIKE :term{i} OR "
+                    f"{table}.title LIKE :term{i} OR "
+                    f"{table}.year LIKE :term{i}"
+                    for i in range(len(search_terms))
+                ]
+            )
+        )
+        sql = text(f"SELECT * FROM {table} WHERE {conditions}")
+        params = {f"term{i}": f"%{term}%" for i, term in enumerate(search_terms)}
+        result = db.session.execute(sql, params)
+    elif search_query and search_option == "AND":
+        search_terms = search_query.split()
+        conditions = (
+            " AND ".join(
+                [
+                    f"({table}.author LIKE :term{i} OR "
+                    f"{table}.title LIKE :term{i} OR "
+                    f"{table}.year LIKE :term{i})"
+                    for i in range(len(search_terms))
+                ]
+            )
+        )
+        sql = text(f"SELECT * FROM {table} WHERE {conditions}")
+        params = {f"term{i}": f"%{term}%" for i, term in enumerate(search_terms)}
+        result = db.session.execute(sql, params)
     else:
         sql = text(f"SELECT * FROM {table}")
         result = db.session.execute(sql)
     return result.all()
 
 
-def select_all_articles(search_query=None):
-    return select_all("articles", search_query)
+def select_all_articles(search_query=None, search_option = None):
+    return select_all("articles", search_query, search_option)
 
 
-def select_all_books(search_query=None):
-    return select_all("books", search_query)
+def select_all_books(search_query=None, search_option = None):
+    return select_all("books", search_query, search_option)
 
 
-def select_all_inproceedings(search_query=None):
-    return select_all("inproceedings",search_query)
+def select_all_inproceedings(search_query=None, search_option = None):
+    return select_all("inproceedings",search_query, search_option)
 
 
 def by_id(table, item_id):
