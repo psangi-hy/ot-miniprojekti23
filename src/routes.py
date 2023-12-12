@@ -79,6 +79,11 @@ def new():
     if request.method == "GET":
         return render_template("new.html")
 
+    #doi = request.form.get("doi", default="")
+    #if doi:
+    #    form_data = db_handling.fetch_by_doi(doi)
+    #    return render_template("new.html", form_data=form_data)
+
     reference_type = request.form.get("type", default="")
     author = request.form.get("author", default="")
     year = request.form.get("year", default="")
