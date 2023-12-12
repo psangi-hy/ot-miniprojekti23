@@ -116,10 +116,11 @@ def new():
 @app.route("/bibtex", methods=["GET", "POST"])
 def bibtex():
     search_query = request.form.get("search_query")
+    search_option = request.form.get("search_option", None)
 
-    articles = db_handling.select_all_articles(search_query)
-    books = db_handling.select_all_books(search_query)
-    inproceedings = db_handling.select_all_inproceedings(search_query)
+    articles = db_handling.select_all_articles(search_query, search_option)
+    books = db_handling.select_all_books(search_query, search_option)
+    inproceedings = db_handling.select_all_inproceedings(search_query, search_option)
 
     return render_template("bibtex.html",
                            articles=articles,
