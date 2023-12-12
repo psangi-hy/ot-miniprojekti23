@@ -36,7 +36,8 @@
 </pre>
 
 <form action="{{ reference.id }}/delete" method="post">
-	<input type="Submit" value="Delete reference" />
+	<input type="Submit" value="Delete reference"
+		onclick="return confirm('Are you sure that you want to delete this reference?')" />
 </form>
 </div>
 {% endblock %}
