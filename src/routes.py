@@ -66,7 +66,7 @@ def new():
     if reference_type == "inproceeding" and db_handling.new_inproceeding(
             key, author, title, year, booktitle, pages, tag):
         return redirect("/")
-    
+
     if doi == "":
         return render_template("error.html", message="No DOI submitted. Please enter a DOI.")
     return render_template("error.html", message="Something went wrong...")
