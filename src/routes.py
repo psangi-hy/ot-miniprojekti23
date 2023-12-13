@@ -40,8 +40,6 @@ def new():
         if 'error' in doi_data:
             return render_template("error.html",
                                    message=f"Invalid DOI submitted ({doi_data['error']})")
-        if doi == "":
-            return render_template("error.html", message="No DOI submitted. Please enter a DOI.")
         return render_template("new.html", form_data=doi_data)
 
     reference_type = request.form.get("type", default="")
@@ -68,13 +66,16 @@ def new():
     if reference_type == "inproceeding" and db_handling.new_inproceeding(
             key, author, title, year, booktitle, pages, tag):
         return redirect("/")
-
+    
+    if doi == "":
+        return render_template("error.html", message="No DOI submitted. Please enter a DOI.")
     return render_template("error.html", message="Something went wrong...")
 
 
 @app.route("/bibtex", methods=["GET", "POST"])
 def bibtex():
-    search_query = request.form.get("search_query")
+    search_query = request.form.get(
+        "search_query") if request.method == "POST" else None
     search_option = request.form.get("search_option", None)
 
     articles = db_handling.select_all_articles(search_query, search_option)
@@ -84,7 +85,9 @@ def bibtex():
     return render_template("bibtex.html",
                            articles=articles,
                            books=books,
-                           inproceedings=inproceedings)
+                           inproceedings=inproceedings,
+                           search_query=search_query,
+                           search_option=search_option)
 
 
 @app.route("/reference/<ref_type>/<int:ref_id>")

@@ -11,6 +11,7 @@
 	References that match all of
 	{%- endif -%}
 	{{- " \"" + "\", \"".join(search_query.split()) + "\"." -}}
+    <button id="reset-search" onclick="resetSearch()">Reset Search</button>
 </h3>
 {%- endif -%}
 
@@ -73,6 +74,9 @@ function sortTable(sortBy) {
         .catch(error => {
             console.error('Error:', error);
         });
+}
+function resetSearch() {
+    window.location.href = '/';
 }
 </script>
 {% endblock %}

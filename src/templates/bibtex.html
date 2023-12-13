@@ -5,6 +5,17 @@
 {% block title %}BibTeX Entries{% endblock %}
 
 {% block content %}
+{%- if search_query -%}
+<h3 class="text-center">
+	{%- if search_option == "OR" -%}
+	References that match any of
+	{%- elif search_option == "AND" -%}
+	References that match all of
+	{%- endif -%}
+	{{- " \"" + "\", \"".join(search_query.split()) + "\"." -}}
+    <button id="reset-search" onclick="resetSearch()">Reset Search</button>
+</h3>
+{%- endif -%}
 <br>
 <div class="button-container">
 <button onclick = "copy_to_clipboard()">Click to copy all BibTeX to clipboard</button>
@@ -52,5 +63,8 @@
         document.body.removeChild(textarea);
         alert("Copied to clipboard")
     }
+    function resetSearch() {
+    window.location.href = '/';
+}
 </script>
 {% endblock %}

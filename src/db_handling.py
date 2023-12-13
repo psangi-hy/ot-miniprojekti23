@@ -42,10 +42,10 @@ def select_all(table, search_query=None, search_option=None):
             ])
         elif search_option == "AND":
             conditions = " AND ".join([
-                f"({table}.author LIKE :term{i}) AND "
-                f"({table}.title LIKE :term{i}) AND "
-                f"({table}.year LIKE :term{i}) AND "
-                f"({table}.tag LIKE :term{i})"
+                f"({table}.author LIKE :term{i} OR "
+                f"{table}.title LIKE :term{i} OR "
+                f"{table}.year LIKE :term{i} OR "
+                f"{table}.tag LIKE :term{i})"
                 for i in range(len(search_terms))
             ])
 
