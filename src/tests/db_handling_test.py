@@ -118,3 +118,83 @@ class Testdbhandling(unittest.TestCase):
         self.assertEqual(len(inproceedings), 0)
 
         self.app_context.pop()
+
+    def test_search_show_correct_references(self):
+        result = db_handling.new_article("MM2022", "Mikko Mökö", "title1", "journal1", 2022, "1", "10-15", "tag1")
+        self.assertTrue(result)
+
+        result = db_handling.new_article("RK2022", "Reijo Kiva", "title2", "journal2", 2022, "1", "20", "tag2")
+        self.assertTrue(result)
+
+        result = db_handling.new_article("HK2022", "Heikki Kiva", "title3", "journal3", 2022, "1", "20", "tag3")
+        self.assertTrue(result)
+      
+        search_results = db_handling.select_all_articles("tag2", "OR")
+        search = search_results[0]
+    
+        self.assertEqual(search.key, "RK2022")
+        self.assertEqual(search.author, "Reijo Kiva")
+        self.assertEqual(search.title, "title2")
+        self.assertEqual(search.journal, "journal2")
+        self.assertEqual(search.year, 2022)
+        self.assertEqual(search.volume, "1")
+        self.assertEqual(search.pages, "20")
+        self.assertEqual(search.tag, "tag2")
+
+        search_results = db_handling.select_all_articles("tag3", "OR")
+        search = search_results[0]
+    
+        self.assertEqual(search.key, "HK2022")
+        self.assertEqual(search.author, "Heikki Kiva")
+        self.assertEqual(search.title, "title3")
+        self.assertEqual(search.journal, "journal3")
+        self.assertEqual(search.year, 2022)
+        self.assertEqual(search.volume, "1")
+        self.assertEqual(search.pages, "20")
+        self.assertEqual(search.tag, "tag3")
+
+        search_results = db_handling.select_all_articles("tag1", "OR")
+        search = search_results[0]
+    
+        self.assertEqual(search.key, "MM2022")
+        self.assertEqual(search.author, "Mikko Mökö")
+        self.assertEqual(search.title, "title1")
+        self.assertEqual(search.journal, "journal1")
+        self.assertEqual(search.year, 2022)
+        self.assertEqual(search.volume, "1")
+        self.assertEqual(search.pages, "10-15")
+        self.assertEqual(search.tag, "tag1")
+
+        self.app_context.pop()
+    
+    def test_OR_search_show_multiple_references(self):
+        result = db_handling.new_article("MM2022", "Mikko Mökö", "title1", "journal1", 2022, "1", "10-15", "tag1")
+        self.assertTrue(result)
+
+        result = db_handling.new_article("RK2022", "Reijo Kiva", "title2", "journal2", 2022, "1", "20", "tag2")
+        self.assertTrue(result)
+
+        result = db_handling.new_article("HK2022", "Heikki Kiva", "title3", "journal3", 2022, "1", "20", "tag3")
+        self.assertTrue(result)
+        
+        expected_results_found = False
+
+        result_count = 0
+        search_results = db_handling.select_all_articles("tag2 tag3", "OR")
+        for search in search_results:
+            if search.key == "RK2022":
+                self.assertEqual(search.author, "Reijo Kiva")
+                self.assertEqual(search.title, "title2")
+                result_count += 1
+            elif search.key == "HK2022":
+                self.assertEqual(search.author, "Heikki Kiva")
+                self.assertEqual(search.title, "title3")
+                result_count += 1
+        
+        if result_count == 2:
+            expected_results_found = True
+
+        if not expected_results_found:
+            self.fail("serach result not correct!")
+
+        self.app_context.pop()
