@@ -119,7 +119,7 @@ class Testdbhandling(unittest.TestCase):
 
         self.app_context.pop()
 
-    def test_search_show_correct_references(self):
+    def test_search_show_correct_reference(self):
         result = db_handling.new_article("MM2022", "Mikko Mökö", "title1", "journal1", 2022, "1", "10-15", "tag1")
         self.assertTrue(result)
 
@@ -167,7 +167,7 @@ class Testdbhandling(unittest.TestCase):
 
         self.app_context.pop()
     
-    def test_OR_search_show_multiple_references(self):
+    def test_search_OR_show_multiple_references(self):
         result = db_handling.new_article("MM2022", "Mikko Mökö", "title1", "journal1", 2022, "1", "10-15", "tag1")
         self.assertTrue(result)
 
@@ -198,3 +198,22 @@ class Testdbhandling(unittest.TestCase):
             self.fail("serach result not correct!")
 
         self.app_context.pop()
+    
+    def test_doi_get_data(self):
+        result = db_handling.fetch_by_doi("10.3352/jeehp.2013.10.3")
+        self.assertTrue(result)
+
+    def test_get_all_references(self):
+        result = db_handling.new_article("MM2022", "Mikko Mökö", "title1", "journal1", 2022, "1", "10-15", "tag1")
+        self.assertTrue(result)
+
+        result = db_handling.new_article("RK2022", "Reijo Kiva", "title2", "journal2", 2022, "1", "20", "tag2")
+        self.assertTrue(result)
+
+        result = db_handling.new_article("HK2022", "Heikki Kiva", "title3", "journal3", 2022, "1", "20", "tag3")
+        self.assertTrue(result)
+
+        all_ref = db_handling.get_all_references()
+
+        self.assertEqual(len(all_ref), 3)
+

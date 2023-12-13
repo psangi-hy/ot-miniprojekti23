@@ -29,43 +29,35 @@ def __get_converted_db_data_list(type_name: str, references):
     return reference_list
 
 
-def select_all(table, search_query=None, search_option= None):
-    if search_query and search_option == "OR":
+def select_all(table, search_query=None, search_option=None):
+    if search_query:
         search_terms = search_query.split()
-        conditions = (
-            " OR ".join(
-                [
-                    f"({table}.author LIKE :term{i}) OR "
-                    f"({table}.title LIKE :term{i}) OR "
-                    f"({table}.year LIKE :term{i}) OR "
-                    f"({table}.tag LIKE :term{i})"
-                    for i in range(len(search_terms))
-                ]
-            )
-        )
+        if search_option == "OR":
+            conditions = " OR ".join([
+                f"({table}.author LIKE :term{i}) OR "
+                f"({table}.title LIKE :term{i}) OR "
+                f"({table}.year LIKE :term{i}) OR "
+                f"({table}.tag LIKE :term{i})"
+                for i in range(len(search_terms))
+            ])
+        elif search_option == "AND":
+            conditions = " AND ".join([
+                f"({table}.author LIKE :term{i}) AND "
+                f"({table}.title LIKE :term{i}) AND "
+                f"({table}.year LIKE :term{i}) AND "
+                f"({table}.tag LIKE :term{i})"
+                for i in range(len(search_terms))
+            ])
+
         sql = text(f"SELECT * FROM {table} WHERE {conditions}")
         params = {f"term{i}": f"%{term}%" for i, term in enumerate(search_terms)}
         result = db.session.execute(sql, params)
-    elif search_query and search_option == "AND":
-        search_terms = search_query.split()
-        conditions = (
-            " AND ".join(
-                [
-                    f"({table}.author LIKE :term{i}) OR "
-                    f"({table}.title LIKE :term{i}) OR "
-                    f"({table}.year LIKE :term{i}) OR "
-                    f"({table}.tag LIKE :term{i})"
-                    for i in range(len(search_terms))
-                ]
-            )
-        )
-        sql = text(f"SELECT * FROM {table} WHERE {conditions}")
-        params = {f"term{i}": f"%{term}%" for i, term in enumerate(search_terms)}
-        result = db.session.execute(sql, params)
+
+        return result.all()
     else:
         sql = text(f"SELECT * FROM {table}")
         result = db.session.execute(sql)
-    return result.all()
+        return result.all()
 
 
 def select_all_articles(search_query=None, search_option = None):
