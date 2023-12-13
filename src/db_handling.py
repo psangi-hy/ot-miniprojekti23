@@ -54,10 +54,10 @@ def select_all(table, search_query=None, search_option=None):
         result = db.session.execute(sql, params)
 
         return result.all()
-    else:
-        sql = text(f"SELECT * FROM {table}")
-        result = db.session.execute(sql)
-        return result.all()
+
+    sql = text(f"SELECT * FROM {table}")
+    result = db.session.execute(sql)
+    return result.all()
 
 
 def select_all_articles(search_query=None, search_option = None):

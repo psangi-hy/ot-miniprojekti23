@@ -216,4 +216,3 @@ class Testdbhandling(unittest.TestCase):
         all_ref = db_handling.get_all_references()
 
         self.assertEqual(len(all_ref), 3)
-
