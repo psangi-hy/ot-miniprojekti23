@@ -199,8 +199,16 @@ class Testdbhandling(unittest.TestCase):
 
         self.app_context.pop()
     
-    def test_doi_get_data(self):
+    def test_doi_get_article_data(self):
         result = db_handling.fetch_by_doi("10.3352/jeehp.2013.10.3")
+        self.assertTrue(result)
+    
+    def test_doi_get_inproceeding_data(self):
+        result = db_handling.fetch_by_doi("10.1145/1149941.1149946")
+        self.assertTrue(result)
+    
+    def test_doi_get_book_data(self):
+        result = db_handling.fetch_by_doi("10.2307/j.ctv5rf2gb.7")
         self.assertTrue(result)
 
     def test_get_all_references(self):
