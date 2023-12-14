@@ -191,15 +191,15 @@ button:hover {
 }
 
 #reset-search {
-    background-color: grey; /* Sets the background color to grey */
-    color: white; /* Sets the text color to white for better contrast */
-    border: none; /* Removes the default border */
-    padding: 5px 10px; /* Adds some padding inside the button for spacing */
-    font-size: 0.8em; /* Reduces the font size to make the button smaller */
-    border-radius: 5px; /* Optional: Adds rounded corners */
-    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    background-color: grey;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 #reset-search:hover {
-    background-color: darkgrey; /* Changes the background on hover for a visual effect */
+    background-color: darkgrey;
 }
