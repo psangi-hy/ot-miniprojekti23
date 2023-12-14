@@ -199,6 +199,38 @@ class Testdbhandling(unittest.TestCase):
 
         self.app_context.pop()
     
+    def test_search_AND_show_multiple_references(self):
+        result = db_handling.new_article("MM2022", "Mikko Mökö", "title1", "journal1", 2022, "1", "10-15", "tag1")
+        self.assertTrue(result)
+
+        result = db_handling.new_article("RK2022", "Reijo Kiva", "title2", "journal2", 2022, "1", "20", "tag1")
+        self.assertTrue(result)
+
+        result = db_handling.new_article("HK2022", "Heikki Kiva", "title3", "journal3", 2022, "1", "20", "tag3")
+        self.assertTrue(result)
+        
+        expected_results_found = False
+
+        result_count = 0
+        search_results = db_handling.select_all_articles("tag1 2022", "AND")
+        for search in search_results:
+            if search.key == "MM2022":
+                self.assertEqual(search.author, "Mikko Mökö")
+                self.assertEqual(search.title, "title1")
+                result_count += 1
+            elif search.key == "RK2022":
+                self.assertEqual(search.author, "Reijo Kiva")
+                self.assertEqual(search.title, "title2")
+                result_count += 1
+        
+        if result_count == 2:
+            expected_results_found = True
+
+        if not expected_results_found:
+            self.fail("serach result not correct!")
+
+        self.app_context.pop()
+    
     def test_doi_get_article_data(self):
         result = db_handling.fetch_by_doi("10.3352/jeehp.2013.10.3")
         self.assertTrue(result)
@@ -210,7 +242,7 @@ class Testdbhandling(unittest.TestCase):
     def test_doi_get_book_data(self):
         result = db_handling.fetch_by_doi("10.2307/j.ctv5rf2gb.7")
         self.assertTrue(result)
-
+    
     def test_get_all_references(self):
         result = db_handling.new_article("MM2022", "Mikko Mökö", "title1", "journal1", 2022, "1", "10-15", "tag1")
         self.assertTrue(result)
