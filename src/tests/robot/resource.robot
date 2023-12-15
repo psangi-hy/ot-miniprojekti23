@@ -39,3 +39,8 @@ Go To Front Page
 
 Go To Bibtex Page
     Go To  ${BIBTEX URL}
+
+Go To Reference Page
+	Go To Front Page
+	[Arguments]  ${name}
+	Click Element  partial link:${name}

@@ -8,13 +8,19 @@ ${REFTITLE}  Proximate composition of Vitex doniana and Saba comorensis fruits
 ${REFAUTHOR}  Charles, Dominic and Mgina, Clarence
 ${REFJOURNAL}  Scientific Reports
 ${REFYEAR}  2023
+${REFVOLUME}  13
+${REFPAGES}  14--15
 
 *** Test Cases ***
-Deleting A Reference Removes It From The Front Page
+The Reference Page Contains Information About The Reference
 	Create Reference
-	Reference Should Exist On The Front Page
-	Delete Reference
-	Reference Should Not Exist On The Front Page
+	Go To Reference Page  ${REFTITLE}
+	Page Should Contain  ${REFTITLE}
+	Page Should Contain  ${REFAUTHOR}
+	Page Should Contain  ${REFJOURNAL}
+	Page Should Contain  ${REFYEAR}
+	Page Should Contain  ${REFVOLUME}
+	Page Should Contain  ${REFPAGES}
 
 *** Keywords ***
 Create Reference
@@ -23,17 +29,6 @@ Create Reference
 	Input Text  title  ${REFTITLE}
 	Input Text  journal  ${REFJOURNAL}
 	Input Text  year  ${REFYEAR}
+	Input Text  volume  ${REFVOLUME}
+	Input Text  pages  ${REFPAGES}
 	Click Button  Save
-
-Reference Should Exist On The Front Page
-	Go To Front Page
-	Page Should Contain  ${REFTITLE}
-	
-Delete Reference
-	Go To Reference Page  ${REFTITLE}
-	Click Button  Delete reference
-	Handle Alert
-
-Reference Should Not Exist On The Front Page
-	Go To Front Page
-	Page Should Not Contain  ${REFTITLE}
