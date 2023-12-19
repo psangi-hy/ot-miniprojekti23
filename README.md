@@ -6,6 +6,7 @@
 
  [Backlog (Google Docs)](https://docs.google.com/spreadsheets/d/17COsn4LBcv9tK5OwG2H8qlhSb43Yw5VLccIJSeliQN4/edit#gid=0)
 
+[Ohjelmistotuotantoprojektin loppuraportti](https://github.com/psangi-hy/ot-miniprojekti23/blob/main/Software%20production_project_final_report.md)
 ## Definition of Done
 * Product backlogin jokaisella sprinttiin valitulla user storylla on kirjattu hyväksymiskriteerit
 * Koodilla on kohtuullinen testikattavuus
